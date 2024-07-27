@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{B962F27E-55AB-4AEF-9040-3BB59E5BB745}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>KeyGeneralPurposeLibrary</RootNamespace>
+        <AssemblyName>KeyGeneralPurposeLibrary</AssemblyName>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="0Harmony">
+          <HintPath>..\Libraries\0Harmony.dll</HintPath>
+        </Reference>
+        <Reference Include="Assembly-CSharp">
+          <HintPath>..\Libraries\Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="BepInEx">
+          <HintPath>..\Libraries\BepInEx.dll</HintPath>
+        </Reference>
+        <Reference Include="mscorlib" />
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\Libraries\Newtonsoft.Json.dll</HintPath>
+        </Reference>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Numerics" />
+        <Reference Include="System.Xml" />
+        <Reference Include="UnityEngine">
+          <HintPath>..\Libraries\UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+          <HintPath>..\Libraries\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.ImageConversionModule">
+          <HintPath>..\Libraries\UnityEngine.ImageConversionModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.IMGUIModule">
+          <HintPath>..\Libraries\UnityEngine.IMGUIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.TextRenderingModule">
+          <HintPath>..\Libraries\UnityEngine.TextRenderingModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UI">
+          <HintPath>..\Libraries\UnityEngine.UI.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Assets\KeyGenLibCustomItemManager.cs" />
+        <Compile Include="Assets\KeyGenLibCustomPlotCreator.cs" />
+        <Compile Include="Assets\KeyGenLibCustomPlotLibrary.cs" />
+        <Compile Include="Assets\KeyGenLibCustomTraitManager.cs" />
+        <Compile Include="Assets\KeyGenLibCustomWarTypeLibrary.cs" />
+        <Compile Include="Assets\KeyGenLibDisasterAssetLibrary.cs" />
+        <Compile Include="Assets\KeyGenLibDisasterGenerator.cs" />
+        <Compile Include="Assets\KeyGenLibFileAssetManager.cs" />
+        <Compile Include="BehaviourManipulation\KeyGenLibCultureManipulationMethodCollection.cs" />
+        <Compile Include="BehaviourManipulation\KeyGenLibHarmonyPatchCollection.cs" />
+        <Compile Include="BehaviourManipulation\KeyGenLibRaceManipulationMethodCollection.cs" />
+        <Compile Include="BehaviourManipulation\KeyGenLibWorldCleansingMethodCollection.cs" />
+        <Compile Include="BehaviourManipulation\KeyGenLibWorldGenerationManipulationMethodCollection.cs" />
+        <Compile Include="BehaviourManipulation\KeyGenLibWorldTileManipulationMethodCollection.cs" />
+        <Compile Include="Classes\CustomDropAsset.cs" />
+        <Compile Include="Classes\CustomItemAsset.cs" />
+        <Compile Include="Classes\CustomMoodAsset.cs" />
+        <Compile Include="Classes\CustomPlotAsset.cs" />
+        <Compile Include="Classes\CustomTrait.cs" />
+        <Compile Include="KLibAssetLibrary.cs" />
+        <Compile Include="KLibComponent.cs" />
+        <Compile Include="KeyGeneralPurposeLibraryConfig.cs" />
+        <Compile Include="KeyLib.cs" />
+        <Compile Include="Powers\KeyGenLibGodPowerButtonGenerator.cs" />
+        <Compile Include="Powers\KeyGenLibGodPowerButtonLibrary.cs" />
+        <Compile Include="Powers\KeyGenLibGodPowerLibrary.cs" />
+        <Compile Include="Powers\KeyGenLibPowerActionWithIdLibrary.cs" />
+        <Compile Include="Powers\KeyGenLibPowerButtonClickActionLibrary.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="Utils\HarmonyUtils.cs" />
+        <Compile Include="Utils\TypeUtils.cs" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>
