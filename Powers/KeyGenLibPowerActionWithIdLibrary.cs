@@ -80,7 +80,6 @@ namespace KeyGeneralPurposeLibrary.Powers {
       }
 
       if (Config.whisperB != Config.whisperA) {
-
         if (Alliance.isSame(Config.whisperA.getAlliance(), Config.whisperB.getAlliance())) {
           WorldTip.showNow("The selected kingdoms are already allied, try again.", false, "top");
           Config.whisperB = null;
