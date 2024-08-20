@@ -64,7 +64,7 @@ namespace KeyGeneralPurposeLibrary.Assets {
       for (int i = 0; i < statDictionary.Count; ++i) {
         string statName = statDictionary.Keys.ElementAt(i);
         string statValue = statDictionary.Values.ElementAt(i);
-        if (statValue.Contains("%")) {
+        if (statValue.Contains('%')) {
           statValue = statValue.Replace("%", "");
           statValue = statValue.Replace(",", ".");
           try {

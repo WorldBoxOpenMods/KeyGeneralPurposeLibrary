@@ -47,9 +47,7 @@ namespace KeyGeneralPurposeLibrary.Assets {
     }
 
     private static string ConvertToSnakeCase(string text) {
-      if (text == null) {
-        throw new ArgumentNullException(nameof(text));
-      }
+      ArgumentNullException.ThrowIfNull(text);
 
       if (text.Length < 2) {
         return text;
@@ -75,7 +73,7 @@ namespace KeyGeneralPurposeLibrary.Assets {
       for (int i = 0; i < statDictionary.Count; ++i) {
         string statName = statDictionary.Keys.ElementAt(i);
         string statValue = statDictionary.Values.ElementAt(i);
-        if (statValue.Contains("%")) {
+        if (statValue.Contains('%')) {
           statValue = statValue.Replace("%", "");
           statValue = statValue.Replace(",", ".");
           try {
