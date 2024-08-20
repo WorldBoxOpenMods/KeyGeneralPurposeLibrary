@@ -27,11 +27,9 @@ namespace KeyGeneralPurposeLibrary.Classes {
     }
 
     private static string ConvertToSnakeCase(string text) {
-      if (text == null) {
-        throw new ArgumentNullException(nameof(text));
-      }
+            ArgumentNullException.ThrowIfNull(text);
 
-      if (text.Length < 2) {
+            if (text.Length < 2) {
         return text;
       }
 
