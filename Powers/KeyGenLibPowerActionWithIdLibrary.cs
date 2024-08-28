@@ -66,12 +66,12 @@ namespace KeyGeneralPurposeLibrary.Powers {
       Kingdom kingdom = city.kingdom;
       if (Config.whisperA == null) {
         Config.whisperA = kingdom;
-        WorldTip.showNow("Select the second kingdom to create an alliance with.", false, "top");
+        WorldTip.showNow("KGPLL_AllianceCreation_SelectSecondKingdom", true, "top");
         return false;
       }
 
       if (Config.whisperB == null && Config.whisperA == kingdom) {
-        WorldTip.showNow("Selected the same kingdom twice, try again.", false, "top");
+        WorldTip.showNow("KGPLL_AllianceCreation_SameKingdomTwiceError", true, "top");
         return false;
       }
 
@@ -81,7 +81,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
 
       if (Config.whisperB != Config.whisperA) {
         if (Alliance.isSame(Config.whisperA.getAlliance(), Config.whisperB.getAlliance())) {
-          WorldTip.showNow("The selected kingdoms are already allied, try again.", false, "top");
+          WorldTip.showNow("KGPLL_AllianceCreation_KingdomsAlreadyAlliedError", true, "top");
           Config.whisperB = null;
           return false;
         }
@@ -110,7 +110,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
             ForceIntoAlliance(allianceB, Config.whisperA);
           }
         }
-        WorldTip.showNow("The kingdom " + Config.whisperA.name + " has successfully entered an alliance with kingdom " + Config.whisperB.name + ".", false, "top");
+        WorldTip.showNow(string.Format(LocalizedTextManager.getText("KGPLL_AllianceCreation_CreationSuccess"), Config.whisperA.name, Config.whisperB.name), false, "top");
         Config.whisperA = null;
         Config.whisperB = null;
       }
@@ -141,11 +141,11 @@ namespace KeyGeneralPurposeLibrary.Powers {
       Culture cultureToWipe = pTile.zone.culture;
       if (cultureToWipe != null) {
         KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().DeleteCulture(cultureToWipe);
-        WorldTip.showNow("Culture deleted!", false, "top");
+        WorldTip.showNow("KGPLL_CultureDeletion_Success", true, "top");
         return true;
       }
 
-      WorldTip.showNow("No culture to delete here, try again!", false, "top");
+      WorldTip.showNow("KGPLL_CultureDeletion_NoCultureSelectedError", true, "top");
       return false;
     }
 
@@ -153,11 +153,11 @@ namespace KeyGeneralPurposeLibrary.Powers {
       Culture cultureToReset = pTile.zone.culture;
       if (cultureToReset != null) {
         KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ResetCulture(cultureToReset);
-        WorldTip.showNow("Culture reset!", false, "top");
+        WorldTip.showNow("KGPLL_CultureFullReset_Success", true, "top");
         return true;
       }
 
-      WorldTip.showNow("No culture to reset here, try again!", false, "top");
+      WorldTip.showNow("KGPLL_CultureFullReset_NoCultureSelectedError", true, "top");
       return false;
     }
 
@@ -165,11 +165,11 @@ namespace KeyGeneralPurposeLibrary.Powers {
       Culture cultureToReset = pTile.zone.culture;
       if (cultureToReset != null) {
         KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ResetCultureTech(cultureToReset);
-        WorldTip.showNow("Culture tech reset!", false, "top");
+        WorldTip.showNow("KGPLL_CultureTechReset_Success", true, "top");
         return true;
       }
 
-      WorldTip.showNow("No culture to reset the tech of here, try again!", false, "top");
+      WorldTip.showNow("KGPLL_CultureTechReset_NoCultureSelectedError", false, "top");
       return false;
     }
 
@@ -179,14 +179,14 @@ namespace KeyGeneralPurposeLibrary.Powers {
         string modifierString = AssetManager.powers.get(pPowerID).dropID;
         if (int.TryParse(modifierString, NumberStyles.Integer, CultureInfo.InvariantCulture, out int modifier)) {
           KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ModifyKnowledgeGain(cultureToIncrease, modifier);
-          WorldTip.showNow("Culture knowledge gain " + (modifier > 0 ? "increased" : "decreased") + "!", false, "top");
+          WorldTip.showNow("KGPLL_CultureKnowledgeGainModification_" + (modifier > 0 ? "Increase" : "Decrease") + "Success", true, "top");
         } else {
-          WorldTip.showNow("Invalid value for knowledge gain provided, try again!", false, "top");
+          WorldTip.showNow("KGPLL_CultureKnowledgeGainModification_InvalidGainValueError", true, "top");
           return false;
         }
         return true;
       }
-      WorldTip.showNow("No culture to change the knowledge gain of here, try again!", false, "top");
+      WorldTip.showNow("KGPLL_CultureKnowledgeGainModification_NoCultureSelectedError", true, "top");
       return false;
     }
 
@@ -198,7 +198,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
         GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.CultureForceSelectCityIndex];
         PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.CultureForceSelectCityButtonIndex];
         if (button != null) {
-          WorldTip.showNow("Select the city to force the culture upon.", false, "top");
+          WorldTip.showNow("KGPLL_CultureForceConversion_SelectCity", true, "top");
           power.select_button_action(power.id);
           PowerButtonSelector.instance.unselectAll();
           PowerButtonSelector.instance.setPower(button);
@@ -207,7 +207,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
         Debug.LogError("Something went wrong with the Culture Conversion! Please report this to the mod author!");
         return false;
       }
-      WorldTip.showNow("No culture to force upon city here, try again!", false, "top");
+      WorldTip.showNow("KGPLL_CultureForceConversion_NoCultureSelectedError", true, "top");
       return false;
     }
 
@@ -216,13 +216,13 @@ namespace KeyGeneralPurposeLibrary.Powers {
       if (cityToForceCultureUpon != null) {
         if (CultureToForceUponCity != null) {
           KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ForceCultureOnCity(CultureToForceUponCity, cityToForceCultureUpon);
-          WorldTip.showNow("Culture forced upon city!", false, "top");
+          WorldTip.showNow("KGPLL_CultureForceConversion_Success", true, "top");
           return true;
         }
-        WorldTip.showNow("No culture to force upon city here, try again!", false, "top");
+        WorldTip.showNow("KGPLL_CultureForceConversion_NoCultureSelectedError", true, "top");
         return false;
       }
-      WorldTip.showNow("No city to force culture upon here, try again!", false, "top");
+      WorldTip.showNow("KGPLL_CultureForceConversion_NoCitySelectedError", true, "top");
       return false;
     }
 
@@ -231,10 +231,10 @@ namespace KeyGeneralPurposeLibrary.Powers {
       if (cityToCreateCultureFor != null) {
         Culture newCulture = World.world.cultures.newCulture(cityToCreateCultureFor.race, cityToCreateCultureFor);
         KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ForceCultureOnCity(newCulture, cityToCreateCultureFor);
-        WorldTip.showNow("New culture created!", false, "top");
+        WorldTip.showNow("KGPLL_CultureCreation_Success", true, "top");
         return true;
       }
-      WorldTip.showNow("No city to create new culture for here, try again!", false, "top");
+      WorldTip.showNow("KGPLL_CultureCreation_NoCitySelected", true, "top");
       return false;
     }
     internal static City CityToAddZoneTo;
@@ -242,18 +242,17 @@ namespace KeyGeneralPurposeLibrary.Powers {
       if (CityToAddZoneTo == null) {
         CityToAddZoneTo = pTile.zone.city;
         if (CityToAddZoneTo != null) {
-          WorldTip.showNow("Select zones to add to the city.", false, "top");
+          WorldTip.showNow("KGPLL_CityZoneAddition_SelectZones", true, "top");
           return false;
         }
-        WorldTip.showNow("No city to add zone to here, try again!", false, "top");
+        WorldTip.showNow("KGPLL_CityZoneAddition_NoCitySelectedError", true, "top");
         return false;
       }
       if (pTile.zone.city == null) {
         CityToAddZoneTo.addZone(pTile.zone);
-        WorldTip.showNow("Zone added to city!", false, "top");
         return true;
       }
-      WorldTip.showNow("The zone you're trying to add already belongs to another city, please remove it from that city first!", false, "top");
+      WorldTip.showNow("KGPLL_CityZoneAddition_ZoneOwnershipConflict", true, "top");
       return false;
     }
     internal static City CityToRemoveZoneFrom;
@@ -261,18 +260,17 @@ namespace KeyGeneralPurposeLibrary.Powers {
       if (CityToRemoveZoneFrom == null) {
         CityToRemoveZoneFrom = pTile.zone.city;
         if (CityToRemoveZoneFrom != null) {
-          WorldTip.showNow("Select zones to remove.", false, "top");
+          WorldTip.showNow("KGPLL_CityZoneRemoval_SelectZones", true, "top");
           return false;
         }
-        WorldTip.showNow("No city to remove zone from here, try again!", false, "top");
+        WorldTip.showNow("KGPLL_CityZoneRemoval_NoCitySelectedError", true, "top");
         return false;
       }
       if (pTile.zone.city == CityToRemoveZoneFrom) {
         CityToRemoveZoneFrom.removeZone(pTile.zone);
-        WorldTip.showNow("Zone removed from city!", false, "top");
         return true;
       }
-      WorldTip.showNow("The zone you're trying to remove doesn't belong to the city you selected, please select the correct city!", false, "top");
+      WorldTip.showNow("KGPLL_CityZoneRemoval_ZoneOwnershipConflict", true, "top");
       return false;
     }
     internal static Culture CultureToAddZoneTo;
@@ -280,18 +278,17 @@ namespace KeyGeneralPurposeLibrary.Powers {
       if (CultureToAddZoneTo == null) {
         CultureToAddZoneTo = pTile.zone.culture;
         if (CultureToAddZoneTo != null) {
-          WorldTip.showNow("Select zones to add to the culture.", false, "top");
+          WorldTip.showNow("KGPLL_CultureZoneAddition_SelectZones", true, "top");
           return false;
         }
-        WorldTip.showNow("No culture to add zone to here, try again!", false, "top");
+        WorldTip.showNow("KGPLL_CultureZoneAddition_NoCultureSelected", true, "top");
         return false;
       }
       if (pTile.zone.culture == null) {
         CultureToAddZoneTo.addZone(pTile.zone);
-        WorldTip.showNow("Zone added to culture!", false, "top");
         return true;
       }
-      WorldTip.showNow("The zone you're trying to add already belongs to another culture, please remove it from that culture first!", false, "top");
+      WorldTip.showNow("KGPLL_CultureZoneAddition_ZoneOwnershipConflict", true, "top");
       return false;
     }
     internal static Culture CultureToRemoveZoneFrom;
@@ -299,18 +296,17 @@ namespace KeyGeneralPurposeLibrary.Powers {
       if (CultureToRemoveZoneFrom == null) {
         CultureToRemoveZoneFrom = pTile.zone.culture;
         if (CultureToRemoveZoneFrom != null) {
-          WorldTip.showNow("Select zones to remove.", false, "top");
+          WorldTip.showNow("KGPLL_CultureZoneRemoval_SelectZones", true, "top");
           return false;
         }
-        WorldTip.showNow("No culture to remove zone from here, try again!", false, "top");
+        WorldTip.showNow("KGPLL_CultureZoneRemoval_NoCultureSelected", true, "top");
         return false;
       }
       if (pTile.zone.culture == CultureToRemoveZoneFrom) {
         CultureToRemoveZoneFrom.removeZone(pTile.zone);
-        WorldTip.showNow("Zone removed from culture!", false, "top");
         return true;
       }
-      WorldTip.showNow("The zone you're trying to remove doesn't belong to the culture you selected, please select the correct culture!", false, "top");
+      WorldTip.showNow("KGPLL_CultureZoneRemoval_ZoneOwnershipConflict", true, "top");
       return false;
     }
 
@@ -320,10 +316,10 @@ namespace KeyGeneralPurposeLibrary.Powers {
         cityToForceAsCapitalCity.kingdom.capital = cityToForceAsCapitalCity;
         cityToForceAsCapitalCity.kingdom.data.capitalID = cityToForceAsCapitalCity.kingdom.capital.data.id;
         cityToForceAsCapitalCity.kingdom.location = cityToForceAsCapitalCity.kingdom.capital.cityCenter;
-        WorldTip.showNow("City forced as capital city!", false, "top");
+        WorldTip.showNow("KGPLL_ForceCapital_Success", true, "top");
         return true;
       }
-      WorldTip.showNow("No city to force as capital city here, try again!", false, "top");
+      WorldTip.showNow("KGPLL_ForceCapital_NoCitySelectedError", true, "top");
       return false;
     }
     internal static City CityToForceIntoOtherKingdom;
@@ -331,10 +327,10 @@ namespace KeyGeneralPurposeLibrary.Powers {
       if (CityToForceIntoOtherKingdom == null) {
         CityToForceIntoOtherKingdom = pTile.zone.city;
         if (CityToForceIntoOtherKingdom != null) {
-          WorldTip.showNow("Select the kingdom to force the city into.", false, "top");
+          WorldTip.showNow("KGPLL_ChangeCityKingdom_SelectKingdom", true, "top");
           return false;
         }
-        WorldTip.showNow("No city to force into other kingdom here, try again!", false, "top");
+        WorldTip.showNow("KGPLL_ChangeCityKingdom_NoCitySelectedError", true, "top");
         return false;
       }
       if (pTile.zone.city?.kingdom != null) {
@@ -342,10 +338,10 @@ namespace KeyGeneralPurposeLibrary.Powers {
         CityToForceIntoOtherKingdom.kingdom = pTile.zone.city.kingdom;
         CityToForceIntoOtherKingdom.kingdom.addCity(CityToForceIntoOtherKingdom);
         CityToForceIntoOtherKingdom.units.ToList().ForEach(a => CityToForceIntoOtherKingdom.kingdom.addUnit(a));
-        WorldTip.showNow("City forced into other kingdom!", false, "top");
+        WorldTip.showNow("KGPLL_ChangeCityKingdom_Success", true, "top");
         return true;
       }
-      WorldTip.showNow("The tile you selected isn't owned by any kingdom!", false, "top");
+      WorldTip.showNow("KGPLL_ChangeCityKingdom_NoKingdomSelectedError", true, "top");
       return false;
     }
 
@@ -357,12 +353,12 @@ namespace KeyGeneralPurposeLibrary.Powers {
             actorToMakeKing.kingdom.king.setProfession(UnitProfession.Unit);
           }
           actorToMakeKing.kingdom.setKing(actorToMakeKing);
-          WorldTip.showNow("Actor made king!", false, "top");
+          WorldTip.showNow("KGPLL_SetKing_Success", true, "top");
           return true;
         }
-        WorldTip.showNow("The actor you selected doesn't have a kingdom!", false, "top");
+        WorldTip.showNow("KGPLL_SetKing_NoKingdomOnSelectedActorError", true, "top");
       }
-      WorldTip.showNow("No actor to make king here, try again!", false, "top");
+      WorldTip.showNow("KGPLL_SetKing_NoActorSelectedError", true, "top");
       return false;
     }
 
@@ -373,7 +369,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
         if (newBuilding == null)
         {
           EffectsLibrary.spawnAtTile("fx_bad_place", pTile, 0.25f);
-          WorldTip.showNow("Can't place building here, try again!", false, "top");
+          WorldTip.showNow("KGPLL_PlaceBuilding_InvalidTileError", true, "top");
           return false;
         }
         if (newBuilding.asset.cityBuilding) {
@@ -384,10 +380,10 @@ namespace KeyGeneralPurposeLibrary.Powers {
             newBuilding.makeRuins();
           }
         }
-        WorldTip.showNow("Building placed!", false, "top");
+        WorldTip.showNow("KGPLL_PlaceBuilding_Success", true, "top");
         return true;
       }
-      WorldTip.showNow("No building to place here, try again!", false, "top");
+      WorldTip.showNow("KGPLL_PlaceBuilding_NoBuildingSelected", true, "top");
       return false;
     }
   }

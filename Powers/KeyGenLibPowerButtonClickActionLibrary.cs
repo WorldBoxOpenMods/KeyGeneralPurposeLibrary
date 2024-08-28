@@ -54,93 +54,93 @@ namespace KeyGeneralPurposeLibrary.Powers {
     public static int PlaceBuildingPowerButtonPressIndex => _placeBuildingPowerButtonPressIndex;
 
     private static bool WhisperOfAlliancePowerButtonPress(string _) {
-      WorldTip.showNow("Select the first kingdom to create an alliance with.", false, "top");
+      WorldTip.showNow("KGPLL_AllianceCreation_SelectFirstKingdom", true, "top");
       Config.whisperA = null;
       Config.whisperB = null;
       return false;
     }
 
     private static bool CultureDeletionPowerButtonPress(string _) {
-      WorldTip.showNow("Select the culture to delete.", false, "top");
+      WorldTip.showNow("KGPLL_CultureDeletion_SelectCulture", true, "top");
       return false;
     }
     
     private static bool CultureResetPowerButtonPress(string _) {
-      WorldTip.showNow("Select the culture to reset.", false, "top");
+      WorldTip.showNow("KGPLL_CultureFullReset_SelectCulture", true, "top");
       return false;
     }
     
     private static bool CultureTechResetPowerButtonPress(string _) {
-      WorldTip.showNow("Select the culture to reset the tech of.", false, "top");
+      WorldTip.showNow("KGPLL_CultureTechReset_SelectCulture", true, "top");
       return false;
     }
     
     private static bool CultureKnowledgeGainModificationPowerButtonPress(string pPowerID) {
       string modifierString = AssetManager.powers.get(pPowerID).dropID;
       if (int.TryParse(modifierString, NumberStyles.Integer, CultureInfo.InvariantCulture, out int modifier)) {
-        WorldTip.showNow("Select the culture to " + (modifier > 0 ? "increase" : "decrease") + " the knowledge gain of.", false, "top");
+        WorldTip.showNow("KGPLL_CultureKnowledgeGainModification_Select" + (modifier > 0 ? "Increase" : "Decrease") + "Culture", true, "top");
       }
       return false;
     }
 
     private static bool CultureForceSelectCulturePowerButtonPress(string _) {
-      WorldTip.showNow("Select the culture to force upon the city.", false, "top");
+      WorldTip.showNow("KGPLL_CultureForceConversion_SelectCulture", true, "top");
       return false;
     }
     
     private static bool CultureForceSelectCityPowerButtonPress(string _) {
       KeyGenLibPowerActionWithIdLibrary.CultureToForceUponCity = null;
-      WorldTip.showNow("Select the city to force the culture upon.", false, "top");
+      WorldTip.showNow("KGPLL_CultureForceConversion_SelectCity", true, "top");
       return false;
     }
     
     private static bool CreateNewCulturePowerButtonPress(string _) {
-      WorldTip.showNow("Select the city to create a new culture for.", false, "top");
+      WorldTip.showNow("KGPLL_CultureCreation_SelectCity", true, "top");
       return false;
     }
     
     private static bool AddZoneToCityPowerButtonPress(string _) {
       KeyGenLibPowerActionWithIdLibrary.CityToAddZoneTo = null;
-      WorldTip.showNow("Select the city to add zones to.", false, "top");
+      WorldTip.showNow("KGPLL_CityZoneAddition_SelectCity", true, "top");
       return false;
     }
 
     private static bool RemoveZoneFromCityPowerButtonPress(string _) {
       KeyGenLibPowerActionWithIdLibrary.CityToRemoveZoneFrom = null;
-      WorldTip.showNow("Select the city to remove zones from.", false, "top");
+      WorldTip.showNow("KGPLL_CityZoneRemoval_SelectCity", true, "top");
       return false;
     }
 
     private static bool AddZoneToCulturePowerButtonPress(string _) {
       KeyGenLibPowerActionWithIdLibrary.CultureToAddZoneTo = null;
-      WorldTip.showNow("Select the culture to add zones to.", false, "top");
+      WorldTip.showNow("KGPLL_CultureZoneAddition_SelectCulture", true, "top");
       return false;
     }
     
     private static bool RemoveZoneFromCulturePowerButtonPress(string _) {
       KeyGenLibPowerActionWithIdLibrary.CultureToRemoveZoneFrom = null;
-      WorldTip.showNow("Select the culture to remove zones from.", false, "top");
+      WorldTip.showNow("KGPLL_CultureZoneRemoval_SelectCulture", true, "top");
       return false;
     }
     
     private static bool ForceCityAsCapitalCityPowerButtonPress(string _) {
-      WorldTip.showNow("Select the city to force as the capital city.", false, "top");
+      WorldTip.showNow("KGPLL_ForceCapital_SelectCity", true, "top");
       return false;
     }
     
     private static bool ForceCityIntoOtherKingdomPowerButtonPress(string _) {
       KeyGenLibPowerActionWithIdLibrary.CityToForceIntoOtherKingdom = null;
-      WorldTip.showNow("Select the city to force into another kingdom.", false, "top");
+      WorldTip.showNow("KGPLL_ChangeCityKingdom_SelectCity", true, "top");
       return false;
     }
     
     private static bool MakeActorKingPowerButtonPress(string _) {
-      WorldTip.showNow("Select the actor to make king.", false, "top");
+      WorldTip.showNow("KGPLL_SetKing_SelectActor", true, "top");
       return false;
     }
     
     private static bool PlaceBuildingPowerButtonPress(string _) {
-      WorldTip.showNow("Select the city to place the building in.", false, "top");
+      WorldTip.showNow("KGPLL_PlaceBuilding_SelectCity", true, "top");
       return false;
     }
   }
