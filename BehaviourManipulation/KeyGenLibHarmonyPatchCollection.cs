@@ -138,6 +138,12 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
       MethodInfo prefix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(addUnit_Prefix));
       Harmony.Patch(original, new HarmonyMethod(prefix));
     }
+    
+    public void PatchCultureTraitAdditions() {
+      MethodInfo original = AccessTools.Method(typeof(Actor), nameof(Actor.setCulture));
+      MethodInfo prefix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(setCulture_Prefix));
+      Harmony.Patch(original, new HarmonyMethod(prefix));
+    }
 
     public void SetTargetFramerate(int targetFrameRate) {
       TargetFrameRate = targetFrameRate;
@@ -452,6 +458,19 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
           clanTraitsArray.Shuffle();
           foreach (string traitId in clanTraitsArray.Select(token => token.Value<string>()).ToArray()) {
             pActor.addTrait(traitId);
+          }
+        }
+      }
+    }
+    
+    private static void setCulture_Prefix(Actor __instance, Culture pCulture) {
+      if (pCulture.data.custom_data_string != null) {
+        bool cultureTraitsSet = pCulture.data.custom_data_string.TryGetValue("CultureTraits", out string cultureTraitsJson);
+        if (cultureTraitsSet) {
+          JToken[] cultureTraitsArray = JsonConvert.DeserializeObject<JArray>(cultureTraitsJson).ToArray();
+          cultureTraitsArray.Shuffle();
+          foreach (string traitId in cultureTraitsArray.Select(token => token.Value<string>()).ToArray()) {
+            __instance.addTrait(traitId);
           }
         }
       }
