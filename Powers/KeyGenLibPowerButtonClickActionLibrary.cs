@@ -84,12 +84,12 @@ namespace KeyGeneralPurposeLibrary.Powers {
     }
 
     private static bool CultureForceSelectCulturePowerButtonPress(string _) {
+      KeyGenLibPowerActionWithIdLibrary.CultureToForceUponCity = null;
       WorldTip.showNow("KGPLL_CultureForceConversion_SelectCulture", true, "top");
       return false;
     }
     
     private static bool CultureForceSelectCityPowerButtonPress(string _) {
-      KeyGenLibPowerActionWithIdLibrary.CultureToForceUponCity = null;
       WorldTip.showNow("KGPLL_CultureForceConversion_SelectCity", true, "top");
       return false;
     }
