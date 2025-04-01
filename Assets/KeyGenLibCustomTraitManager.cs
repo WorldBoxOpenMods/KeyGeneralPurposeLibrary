@@ -9,10 +9,10 @@ using UnityEngine;
 namespace KeyGeneralPurposeLibrary.Assets {
   public class KeyGenLibCustomTraitManager : KLibComponent {
     public void AddTraitToLocalizedLibrary(string id, string description) {
-      LocalizedTextManager.instance.localizedText.Remove("trait_" + id);
-      LocalizedTextManager.instance.localizedText.Remove("trait_" + id + "_info");
-      LocalizedTextManager.instance.localizedText.Add("trait_" + id, id);
-      LocalizedTextManager.instance.localizedText.Add("trait_" + id + "_info", description);
+      LocalizedTextManager.instance._localized_text.Remove("trait_" + id);
+      LocalizedTextManager.instance._localized_text.Remove("trait_" + id + "_info");
+      LocalizedTextManager.instance._localized_text.Add("trait_" + id, id);
+      LocalizedTextManager.instance._localized_text.Add("trait_" + id + "_info", description);
     }
 
     public void SaveTraitsLocally(string modName, List<CustomTrait> traits) {

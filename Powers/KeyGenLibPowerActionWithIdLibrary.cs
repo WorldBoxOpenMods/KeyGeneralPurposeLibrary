@@ -64,35 +64,35 @@ namespace KeyGeneralPurposeLibrary.Powers {
       }
 
       Kingdom kingdom = city.kingdom;
-      if (Config.whisperA == null) {
-        Config.whisperA = kingdom;
+      if (Config.whisper_A == null) {
+        Config.whisper_A = kingdom;
         WorldTip.showNow("KGPLL_AllianceCreation_SelectSecondKingdom", true, "top");
         return false;
       }
 
-      if (Config.whisperB == null && Config.whisperA == kingdom) {
+      if (Config.whisper_B == null && Config.whisper_A == kingdom) {
         WorldTip.showNow("KGPLL_AllianceCreation_SameKingdomTwiceError", true, "top");
         return false;
       }
 
-      if (Config.whisperB == null) {
-        Config.whisperB = kingdom;
+      if (Config.whisper_B == null) {
+        Config.whisper_B = kingdom;
       }
 
-      if (Config.whisperB != Config.whisperA) {
-        if (Alliance.isSame(Config.whisperA.getAlliance(), Config.whisperB.getAlliance())) {
+      if (Config.whisper_B != Config.whisper_A) {
+        if (Alliance.isSame(Config.whisper_A.getAlliance(), Config.whisper_B.getAlliance())) {
           WorldTip.showNow("KGPLL_AllianceCreation_KingdomsAlreadyAlliedError", true, "top");
-          Config.whisperB = null;
+          Config.whisper_B = null;
           return false;
         }
 
-        foreach (War war in World.world.wars.getWars(Config.whisperA).Where(war => war.isInWarWith(Config.whisperA, Config.whisperB))) {
-          war.removeFromWar(Config.whisperA);
-          war.removeFromWar(Config.whisperB);
+        foreach (War war in World.world.wars.getWars(Config.whisper_A).Where(war => war.isInWarWith(Config.whisper_A, Config.whisper_B))) {
+          war.removeFromWar(Config.whisper_A);
+          war.removeFromWar(Config.whisper_B);
         }
 
-        Alliance allianceA = Config.whisperA.getAlliance();
-        Alliance allianceB = Config.whisperB.getAlliance();
+        Alliance allianceA = Config.whisper_A.getAlliance();
+        Alliance allianceB = Config.whisper_B.getAlliance();
         if (allianceA != null) {
           if (allianceB != null) {
             IEnumerable<Kingdom> kingdoms = allianceB.kingdoms_list;
@@ -101,18 +101,18 @@ namespace KeyGeneralPurposeLibrary.Powers {
               ForceIntoAlliance(allianceA, ally);
             }
           } else {
-            ForceIntoAlliance(allianceA, Config.whisperB);
+            ForceIntoAlliance(allianceA, Config.whisper_B);
           }
         } else {
           if (allianceB == null) {
-            ForceNewAlliance(Config.whisperA, Config.whisperB);
+            ForceNewAlliance(Config.whisper_A, Config.whisper_B);
           } else {
-            ForceIntoAlliance(allianceB, Config.whisperA);
+            ForceIntoAlliance(allianceB, Config.whisper_A);
           }
         }
-        WorldTip.showNow(string.Format(LocalizedTextManager.getText("KGPLL_AllianceCreation_CreationSuccess"), Config.whisperA.name, Config.whisperB.name), false, "top");
-        Config.whisperA = null;
-        Config.whisperB = null;
+        WorldTip.showNow(string.Format(LocalizedTextManager.getText("KGPLL_AllianceCreation_CreationSuccess"), Config.whisper_A.name, Config.whisper_B.name), false, "top");
+        Config.whisper_A = null;
+        Config.whisper_B = null;
       }
 
       return true;
@@ -176,7 +176,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private static bool ClickWithCultureKnowledgeGainModification(WorldTile pTile, string pPowerID) {
       Culture cultureToIncrease = pTile.zone.culture;
       if (cultureToIncrease != null) {
-        string modifierString = AssetManager.powers.get(pPowerID).dropID;
+        string modifierString = AssetManager.powers.get(pPowerID).drop_id;
         if (int.TryParse(modifierString, NumberStyles.Integer, CultureInfo.InvariantCulture, out int modifier)) {
           KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ModifyKnowledgeGain(cultureToIncrease, modifier);
           WorldTip.showNow("KGPLL_CultureKnowledgeGainModification_" + (modifier > 0 ? "Increase" : "Decrease") + "Success", true, "top");
@@ -363,7 +363,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     }
 
     private static bool ClickWithPlaceBuilding(WorldTile pTile, string pPowerID) {
-      BuildingAsset buildingToPlace = AssetManager.buildings.get(AssetManager.powers.get(pPowerID).dropID);
+      BuildingAsset buildingToPlace = AssetManager.buildings.get(AssetManager.powers.get(pPowerID).drop_id);
       if (buildingToPlace != null) {
         Building newBuilding = World.world.buildings.addBuilding(buildingToPlace.id, pTile);
         if (newBuilding == null)

@@ -3,10 +3,10 @@
 namespace KeyGeneralPurposeLibrary.Assets {
   public class KeyGenLibCustomPlotCreator : KLibComponent {
     public void AddPlotToLocalizedLibrary(string id, string description) {
-      LocalizedTextManager.instance.localizedText.Remove("plot_" + id);
-      LocalizedTextManager.instance.localizedText.Remove("plot_description_" + id + "_info");
-      LocalizedTextManager.instance.localizedText.Add("plot_" + id, id);
-      LocalizedTextManager.instance.localizedText.Add("plot_description_" + id + "_info", description);
+      LocalizedTextManager.instance._localized_text.Remove("plot_" + id);
+      LocalizedTextManager.instance._localized_text.Remove("plot_description_" + id + "_info");
+      LocalizedTextManager.instance._localized_text.Add("plot_" + id, id);
+      LocalizedTextManager.instance._localized_text.Add("plot_description_" + id + "_info", description);
     }
 
     public Plot CreateAssassinationPlot(PlotAsset plotAsset, Actor initiatorActor, Actor targetActor) {

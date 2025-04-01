@@ -55,8 +55,8 @@ namespace KeyGeneralPurposeLibrary.Powers {
 
     private static bool WhisperOfAlliancePowerButtonPress(string _) {
       WorldTip.showNow("KGPLL_AllianceCreation_SelectFirstKingdom", true, "top");
-      Config.whisperA = null;
-      Config.whisperB = null;
+      Config.whisper_A = null;
+      Config.whisper_B = null;
       return false;
     }
 
@@ -76,7 +76,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     }
     
     private static bool CultureKnowledgeGainModificationPowerButtonPress(string pPowerID) {
-      string modifierString = AssetManager.powers.get(pPowerID).dropID;
+      string modifierString = AssetManager.powers.get(pPowerID).drop_id;
       if (int.TryParse(modifierString, NumberStyles.Integer, CultureInfo.InvariantCulture, out int modifier)) {
         WorldTip.showNow("KGPLL_CultureKnowledgeGainModification_Select" + (modifier > 0 ? "Increase" : "Decrease") + "Culture", true, "top");
       }

@@ -60,38 +60,38 @@ namespace KeyGeneralPurposeLibrary.Powers {
       _massTraitRemovalRain = new GodPower {
         id = "trait_mass_removal_rain_keygui",
         name = "Trait Mass Removal Rain",
-        holdAction = true,
-        showToolSizes = true,
-        unselectWhenWindow = true,
-        fallingChance = 0.05f,
+        hold_action = true,
+        show_tool_sizes = true,
+        unselect_when_window = true,
+        falling_chance = 0.05f,
         rank = PowerRank.Rank0_free,
-        dropID = "trait_mass_removal_rain_keygui",
+        drop_id = "trait_mass_removal_rain_keygui",
         click_power_action = (tTile, pPower) => {
           bool result = AssetManager.powers.spawnDrops(tTile, pPower);
           result = result && AssetManager.powers.flashPixel(tTile, pPower);
           result = result && AssetManager.powers.fmodDrawingSound(tTile, pPower);
           return result;
         },
-        click_power_brush_action = AssetManager.powers.loopWithCurrentBrushPower,
+        click_power_brush_action = AssetManager.powers.loopWithCurrentBrushPowerForDropsFull,
         fmod_event_drawing = "event:/SFX/POWERS/GammaRain"
       };
       AddAsset(_massTraitRemovalRain, out _massTraitRemovalRainIndex);
       _massItemAdditionRain = new GodPower {
         id = "item_mass_addition_rain_keygui",
         name = "Item Mass Addition Rain",
-        holdAction = true,
-        showToolSizes = true,
-        unselectWhenWindow = true,
-        fallingChance = 0.05f,
+        hold_action = true,
+        show_tool_sizes = true,
+        unselect_when_window = true,
+        falling_chance = 0.05f,
         rank = PowerRank.Rank0_free,
-        dropID = "item_mass_addition_rain_keygui",
+        drop_id = "item_mass_addition_rain_keygui",
         click_power_action = (tTile, pPower) => {
           bool result = AssetManager.powers.spawnDrops(tTile, pPower);
           result = result && AssetManager.powers.flashPixel(tTile, pPower);
           result = result && AssetManager.powers.fmodDrawingSound(tTile, pPower);
           return result;
         },
-        click_power_brush_action = AssetManager.powers.loopWithCurrentBrushPower,
+        click_power_brush_action = AssetManager.powers.loopWithCurrentBrushPowerForDropsFull,
         fmod_event_drawing = "event:/SFX/POWERS/GammaRain"
       };
       AddAsset(_massItemAdditionRain, out _massItemAdditionRainIndex);
@@ -113,7 +113,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _cultureDeletion = new GodPower() {
       id = "culture_wipe_keygui",
       name = "Culture Wipe",
-      force_map_text = MapMode.Cultures,
+      force_map_mode = MetaType.Culture,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.CultureDeletionPowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithCultureDeletionIndex]
     };
@@ -121,7 +121,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _cultureReset = new GodPower() {
       id = "culture_reset_keygui",
       name = "Culture Reset",
-      force_map_text = MapMode.Cultures,
+      force_map_mode = MetaType.Culture,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.CultureResetPowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithCultureResetIndex]
     };
@@ -129,7 +129,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _cultureTechReset = new GodPower() {
       id = "culture_tech_reset_keygui",
       name = "Culture Tech Reset",
-      force_map_text = MapMode.Cultures,
+      force_map_mode = MetaType.Culture,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.CultureTechResetPowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithCultureTechResetIndex]
     };
@@ -137,7 +137,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _cultureKnowledgeGainModification = new GodPower() {
       id = "culture_knowledge_gain_modification_keygui",
       name = "Culture Knowledge Gain Modification",
-      force_map_text = MapMode.Cultures,
+      force_map_mode = MetaType.Culture,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.CultureKnowledgeGainModificationPowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithCultureKnowledgeGainModificationIndex]
     };
@@ -145,7 +145,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _cultureForceSelectCulture = new GodPower() {
       id = "culture_force_select_culture_keygui",
       name = "Culture Force Select Culture",
-      force_map_text = MapMode.Cultures,
+      force_map_mode = MetaType.Culture,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.CultureForceSelectCulturePowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithCultureForceSelectCultureIndex]
     };
@@ -153,7 +153,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _cultureForceSelectCity = new GodPower() {
       id = "culture_force_select_city_keygui",
       name = "Culture Force Select City",
-      force_map_text = MapMode.Cities,
+      force_map_mode = MetaType.City,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.CultureForceSelectCityPowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithCultureForceSelectCityIndex]
     };
@@ -161,7 +161,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _createNewCulture = new GodPower() {
       id = "create_new_culture_keygui",
       name = "Create New Culture",
-      force_map_text = MapMode.Cities,
+      force_map_mode = MetaType.City,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.CreateNewCulturePowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithCreateNewCultureIndex]
     };
@@ -169,7 +169,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _addZoneToCity = new GodPower() {
       id = "add_zone_to_city_keygui",
       name = "Add Zone To City",
-      force_map_text = MapMode.Cities,
+      force_map_mode = MetaType.City,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.AddZoneToCityPowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithAddZoneToCityIndex]
     };
@@ -177,7 +177,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _removeZoneFromCity = new GodPower() {
       id = "remove_zone_from_city_keygui",
       name = "Remove Zone From City",
-      force_map_text = MapMode.Cities,
+      force_map_mode = MetaType.City,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.RemoveZoneFromCityPowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithRemoveZoneFromCityIndex]
     };
@@ -185,7 +185,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _addZoneToCulture = new GodPower() {
       id = "add_zone_to_culture_keygui",
       name = "Add Zone To Culture",
-      force_map_text = MapMode.Cultures,
+      force_map_mode = MetaType.Culture,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.AddZoneToCulturePowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithAddZoneToCultureIndex]
     };
@@ -193,7 +193,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _removeZoneFromCulture = new GodPower() {
       id = "remove_zone_from_culture_keygui",
       name = "Remove Zone From Culture",
-      force_map_text = MapMode.Cultures,
+      force_map_mode = MetaType.Culture,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.RemoveZoneFromCulturePowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithRemoveZoneFromCultureIndex]
     };
@@ -201,7 +201,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _forceCityAsCapitalCity = new GodPower() {
       id = "force_city_as_capital_city_keygui",
       name = "Force City As Capital City",
-      force_map_text = MapMode.Cities,
+      force_map_mode = MetaType.City,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.ForceCityAsCapitalCityPowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithForceCityAsCapitalCityIndex]
     };
@@ -209,7 +209,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _forceCityIntoOtherKingdom = new GodPower() {
       id = "force_city_into_other_kingdom_keygui",
       name = "Force City Into Other Kingdom",
-      force_map_text = MapMode.Cities,
+      force_map_mode = MetaType.City,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.ForceCityIntoOtherKingdomPowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithForceCityIntoOtherKingdomIndex]
     };

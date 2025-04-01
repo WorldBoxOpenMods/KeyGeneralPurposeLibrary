@@ -22,8 +22,8 @@ namespace KeyGeneralPurposeLibrary.Classes {
     public CustomItemAsset() { }
 
     private static void AddItemToLocalizedLibrary(string id) {
-      LocalizedTextManager.instance.localizedText.Remove("item_" + id);
-      LocalizedTextManager.instance.localizedText.Add("item_" + id, id);
+      LocalizedTextManager.instance._localized_text.Remove("item_" + id);
+      LocalizedTextManager.instance._localized_text.Add("item_" + id, id);
     }
 
     private static string ConvertToSnakeCase(string text) {

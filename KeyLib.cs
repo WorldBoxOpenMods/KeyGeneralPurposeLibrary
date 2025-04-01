@@ -48,7 +48,7 @@ namespace KeyGeneralPurposeLibrary {
     }
 
     private void Update() {
-      foreach (KLibComponent component in Components.Where(component => component.IsInitialized == false).Where(_ => global::Config.gameLoaded)) {
+      foreach (KLibComponent component in Components.Where(component => component.IsInitialized == false).Where(_ => global::Config.game_loaded)) {
         component.Initialize();
       }
 
