@@ -83,7 +83,7 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
       MethodInfo original = AccessTools.Method(typeof(Actor), nameof(Actor.addTrait), new []{typeof(ActorTrait), typeof(bool)});
       MethodInfo postfix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(Actor_addTrait_Postfix));
       Harmony.Patch(original, null, new HarmonyMethod(postfix));
-      original = AccessTools.Method(typeof(Actor), nameof(Actor.removeTrait), new []{typeof(ActorTrait), typeof(bool)});
+      original = AccessTools.Method(typeof(Actor), nameof(Actor.removeTrait), new []{typeof(ActorTrait)});
       postfix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(Actor_removeTrait_Postfix));
       Harmony.Patch(original, null, new HarmonyMethod(postfix));
       original = AccessTools.Method(typeof(Actor), nameof(Actor.removeTraits));
