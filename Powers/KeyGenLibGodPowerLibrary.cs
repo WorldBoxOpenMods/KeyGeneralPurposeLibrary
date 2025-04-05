@@ -103,7 +103,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _whisperOfAlliance = new GodPower() {
       id = "create_alliance_keygui",
       name = "Whisper Of Alliance",
-      force_map_text = MapMode.Alliances,
+      force_map_mode = MetaType.Alliances,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.WhisperOfAlliancePowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithWhisperOfAllianceIndex]
     };
@@ -219,7 +219,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _makeActorKing = new GodPower() {
       id = "make_actor_king_keygui",
       name = "Make Actor King",
-      force_map_text = MapMode.None,
+      force_map_mode = MetaType.None,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.MakeActorKingPowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithMakeActorKingIndex]
     };
@@ -227,7 +227,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _placeBuilding = new GodPower() {
       id = "place_building_keygui",
       name = "Place Building",
-      force_map_text = MapMode.None,
+      force_map_mode = MetaType.None,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.PlaceBuildingPowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithPlaceBuildingIndex]
     };
