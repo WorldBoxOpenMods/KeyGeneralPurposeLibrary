@@ -6,6 +6,7 @@ using KeyGeneralPurposeLibrary.Assets;
 using UnityEngine;
 
 namespace KeyGeneralPurposeLibrary.Classes {
+  [Obsolete]
   public class CustomItemAsset : ItemAsset {
     private const string NameValueGroupSeparator = "{+-Group-+}";
     private const string NameValuePairSeparator = "{+-Pair-+}";

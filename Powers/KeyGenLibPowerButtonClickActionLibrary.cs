@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace KeyGeneralPurposeLibrary.Powers {
   public class KeyGenLibPowerButtonClickActionLibrary : KLibAssetLibrary<PowerButtonClickAction> {
     public KeyGenLibPowerButtonClickActionLibrary() {
