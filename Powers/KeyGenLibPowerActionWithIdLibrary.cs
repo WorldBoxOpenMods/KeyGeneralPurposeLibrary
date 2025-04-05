@@ -87,8 +87,8 @@ namespace KeyGeneralPurposeLibrary.Powers {
         }
 
         foreach (War war in World.world.wars.getWars(Config.whisper_A).Where(war => war.isInWarWith(Config.whisper_A, Config.whisper_B))) {
-          war.removeFromWar(Config.whisper_A);
-          war.removeFromWar(Config.whisper_B);
+          war.removeFromWar(Config.whisper_A, true);
+          war.removeFromWar(Config.whisper_B, true);
         }
 
         Alliance allianceA = Config.whisper_A.getAlliance();
@@ -127,10 +127,12 @@ namespace KeyGeneralPurposeLibrary.Powers {
 
     private static void ForceNewAlliance(Kingdom kingdomA, Kingdom kingdomB) {
       Alliance alliance = World.world.alliances.newObject();
-      alliance.createAlliance();
-      alliance.data.founder_kingdom_1 = kingdomA.data.name;
+      alliance.createNewAlliance();
+      alliance.data.founder_kingdom_id = kingdomA.data.id;
+      alliance.data.founder_kingdom_name = kingdomA.data.name;
       if (kingdomA.king != null) {
-        alliance.data.founder_name_1 = kingdomA.king.getName();
+        alliance.data.founder_actor_id = kingdomA.king.data.id;
+        alliance.data.founder_actor_name = kingdomA.king.getName();
       }
       ForceIntoAlliance(alliance, kingdomA);
       ForceIntoAlliance(alliance, kingdomB);
@@ -138,7 +140,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     }
 
     private static bool ClickWithCultureDeletion(WorldTile pTile, string pPowerID) {
-      Culture cultureToWipe = pTile.zone.culture;
+      Culture cultureToWipe = pTile.zone.city?.culture;
       if (cultureToWipe != null) {
         KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().DeleteCulture(cultureToWipe);
         WorldTip.showNow("KGPLL_CultureDeletion_Success", true, "top");
@@ -150,7 +152,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     }
 
     private static bool ClickWithCultureReset(WorldTile pTile, string pPowerID) {
-      Culture cultureToReset = pTile.zone.culture;
+      Culture cultureToReset = pTile.zone.city?.culture;
       if (cultureToReset != null) {
         KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ResetCulture(cultureToReset);
         WorldTip.showNow("KGPLL_CultureFullReset_Success", true, "top");
@@ -192,7 +194,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
 
     internal static Culture CultureToForceUponCity;
     private static bool ClickWithCultureForceSelectCulture(WorldTile pTile, string pPowerID) {
-      Culture cultureToForce = pTile.zone.culture;
+      Culture cultureToForce = pTile.zone.city?.culture;
       CultureToForceUponCity = cultureToForce;
       if (cultureToForce != null) {
         GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.CultureForceSelectCityIndex];
@@ -229,7 +231,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private static bool ClickWithCreateNewCulture(WorldTile pTile, string pPowerID) {
       City cityToCreateCultureFor = pTile.zone.city;
       if (cityToCreateCultureFor != null) {
-        Culture newCulture = World.world.cultures.newCulture(cityToCreateCultureFor.race, cityToCreateCultureFor);
+        Culture newCulture = World.world.cultures.newCulture(cityToCreateCultureFor.leader);
         KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ForceCultureOnCity(newCulture, cityToCreateCultureFor);
         WorldTip.showNow("KGPLL_CultureCreation_Success", true, "top");
         return true;
@@ -315,7 +317,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
       if (cityToForceAsCapitalCity != null) {
         cityToForceAsCapitalCity.kingdom.capital = cityToForceAsCapitalCity;
         cityToForceAsCapitalCity.kingdom.data.capitalID = cityToForceAsCapitalCity.kingdom.capital.data.id;
-        cityToForceAsCapitalCity.kingdom.location = cityToForceAsCapitalCity.kingdom.capital.cityCenter;
+        cityToForceAsCapitalCity.kingdom.location = cityToForceAsCapitalCity.kingdom.capital.city_center;
         WorldTip.showNow("KGPLL_ForceCapital_Success", true, "top");
         return true;
       }
@@ -334,10 +336,10 @@ namespace KeyGeneralPurposeLibrary.Powers {
         return false;
       }
       if (pTile.zone.city?.kingdom != null) {
-        CityToForceIntoOtherKingdom.kingdom.removeCity(CityToForceIntoOtherKingdom);
+        CityToForceIntoOtherKingdom.kingdom.cities.Remove(CityToForceIntoOtherKingdom);
         CityToForceIntoOtherKingdom.kingdom = pTile.zone.city.kingdom;
-        CityToForceIntoOtherKingdom.kingdom.addCity(CityToForceIntoOtherKingdom);
-        CityToForceIntoOtherKingdom.units.ToList().ForEach(a => CityToForceIntoOtherKingdom.kingdom.addUnit(a));
+        CityToForceIntoOtherKingdom.kingdom.cities.Add(CityToForceIntoOtherKingdom);
+        CityToForceIntoOtherKingdom.units.ToList().ForEach(a => a.setKingdom(CityToForceIntoOtherKingdom.kingdom));
         WorldTip.showNow("KGPLL_ChangeCityKingdom_Success", true, "top");
         return true;
       }
@@ -371,14 +373,6 @@ namespace KeyGeneralPurposeLibrary.Powers {
           EffectsLibrary.spawnAtTile("fx_bad_place", pTile, 0.25f);
           WorldTip.showNow("KGPLL_PlaceBuilding_InvalidTileError", true, "top");
           return false;
-        }
-        if (newBuilding.asset.cityBuilding) {
-          if( pTile.zone.city != null) {
-            pTile.zone.city.addBuilding(newBuilding);
-            newBuilding.retake();
-          } else {
-            newBuilding.makeRuins();
-          }
         }
         WorldTip.showNow("KGPLL_PlaceBuilding_Success", true, "top");
         return true;

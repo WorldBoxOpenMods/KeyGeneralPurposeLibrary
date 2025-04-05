@@ -73,7 +73,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
           return result;
         },
         click_power_brush_action = AssetManager.powers.loopWithCurrentBrushPowerForDropsFull,
-        fmod_event_drawing = "event:/SFX/POWERS/GammaRain"
+        sound_drawing = "event:/SFX/POWERS/GammaRain"
       };
       AddAsset(_massTraitRemovalRain, out _massTraitRemovalRainIndex);
       _massItemAdditionRain = new GodPower {
@@ -92,7 +92,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
           return result;
         },
         click_power_brush_action = AssetManager.powers.loopWithCurrentBrushPowerForDropsFull,
-        fmod_event_drawing = "event:/SFX/POWERS/GammaRain"
+        sound_drawing = "event:/SFX/POWERS/GammaRain"
       };
       AddAsset(_massItemAdditionRain, out _massItemAdditionRainIndex);
       foreach (GodPower power in Assets) {
