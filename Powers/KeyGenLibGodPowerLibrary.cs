@@ -4,15 +4,11 @@ namespace KeyGeneralPurposeLibrary.Powers {
       AddAsset(_whisperOfAlliance, out _whisperOfAllianceIndex);
       AddAsset(_cultureDeletion, out _cultureDeletionIndex);
       AddAsset(_cultureReset, out _cultureResetIndex);
-      AddAsset(_cultureTechReset, out _cultureTechResetIndex);
-      AddAsset(_cultureKnowledgeGainModification, out _cultureKnowledgeGainModificationIndex);
       AddAsset(_cultureForceSelectCulture, out _cultureForceSelectCultureIndex);
       AddAsset(_cultureForceSelectCity, out _cultureForceSelectCityIndex);
       AddAsset(_createNewCulture, out _createNewCultureIndex);
       AddAsset(_addZoneToCity, out _addZoneToCityIndex);
       AddAsset(_removeZoneFromCity, out _removeZoneFromCityIndex);
-      AddAsset(_addZoneToCulture, out _addZoneToCultureIndex);
-      AddAsset(_removeZoneFromCulture, out _removeZoneFromCultureIndex);
       AddAsset(_forceCityAsCapitalCity, out _forceCityAsCapitalCityIndex);
       AddAsset(_forceCityIntoOtherKingdom, out _forceCityIntoOtherKingdomIndex);
       AddAsset(_makeActorKing, out _makeActorKingIndex);
@@ -22,15 +18,11 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private static int _massTraitRemovalRainIndex;
     private static int _cultureDeletionIndex;
     private static int _cultureResetIndex;
-    private static int _cultureTechResetIndex;
-    private static int _cultureKnowledgeGainModificationIndex;
     private static int _cultureForceSelectCultureIndex;
     private static int _cultureForceSelectCityIndex;
     private static int _createNewCultureIndex;
     private static int _addZoneToCityIndex;
     private static int _removeZoneFromCityIndex;
-    private static int _addZoneToCultureIndex;
-    private static int _removeZoneFromCultureIndex;
     private static int _forceCityAsCapitalCityIndex;
     private static int _forceCityIntoOtherKingdomIndex;
     private static int _massItemAdditionRainIndex;
@@ -40,15 +32,11 @@ namespace KeyGeneralPurposeLibrary.Powers {
     public static int MassTraitRemovalRainIndex => _massTraitRemovalRainIndex;
     public static int CultureDeletionIndex => _cultureDeletionIndex;
     public static int CultureResetIndex => _cultureResetIndex;
-    public static int CultureTechResetIndex => _cultureTechResetIndex;
-    public static int CultureKnowledgeGainModificationIndex => _cultureKnowledgeGainModificationIndex;
     public static int CultureForceSelectCultureIndex => _cultureForceSelectCultureIndex;
     public static int CultureForceSelectCityIndex => _cultureForceSelectCityIndex;
     public static int CreateNewCultureIndex => _createNewCultureIndex;
     public static int AddZoneToCityIndex => _addZoneToCityIndex;
     public static int RemoveZoneFromCityIndex => _removeZoneFromCityIndex;
-    public static int AddZoneToCultureIndex => _addZoneToCultureIndex;
-    public static int RemoveZoneFromCultureIndex => _removeZoneFromCultureIndex;
     public static int ForceCityAsCapitalCityIndex => _forceCityAsCapitalCityIndex;
     public static int ForceCityIntoOtherKingdomIndex => _forceCityIntoOtherKingdomIndex;
     public static int MassItemAdditionRainIndex => _massItemAdditionRainIndex;
@@ -125,22 +113,6 @@ namespace KeyGeneralPurposeLibrary.Powers {
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.CultureResetPowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithCultureResetIndex]
     };
-
-    private readonly GodPower _cultureTechReset = new GodPower() {
-      id = "culture_tech_reset_keygui",
-      name = "Culture Tech Reset",
-      force_map_mode = MetaType.Culture,
-      select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.CultureTechResetPowerButtonPressIndex],
-      click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithCultureTechResetIndex]
-    };
-    
-    private readonly GodPower _cultureKnowledgeGainModification = new GodPower() {
-      id = "culture_knowledge_gain_modification_keygui",
-      name = "Culture Knowledge Gain Modification",
-      force_map_mode = MetaType.Culture,
-      select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.CultureKnowledgeGainModificationPowerButtonPressIndex],
-      click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithCultureKnowledgeGainModificationIndex]
-    };
     
     private readonly GodPower _cultureForceSelectCulture = new GodPower() {
       id = "culture_force_select_culture_keygui",
@@ -180,22 +152,6 @@ namespace KeyGeneralPurposeLibrary.Powers {
       force_map_mode = MetaType.City,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.RemoveZoneFromCityPowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithRemoveZoneFromCityIndex]
-    };
-    
-    private readonly GodPower _addZoneToCulture = new GodPower() {
-      id = "add_zone_to_culture_keygui",
-      name = "Add Zone To Culture",
-      force_map_mode = MetaType.Culture,
-      select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.AddZoneToCulturePowerButtonPressIndex],
-      click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithAddZoneToCultureIndex]
-    };
-    
-    private readonly GodPower _removeZoneFromCulture = new GodPower() {
-      id = "remove_zone_from_culture_keygui",
-      name = "Remove Zone From Culture",
-      force_map_mode = MetaType.Culture,
-      select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.RemoveZoneFromCulturePowerButtonPressIndex],
-      click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithRemoveZoneFromCultureIndex]
     };
     
     private readonly GodPower _forceCityAsCapitalCity = new GodPower() {

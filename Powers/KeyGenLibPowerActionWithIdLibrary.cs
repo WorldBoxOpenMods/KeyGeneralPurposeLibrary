@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using KeyGeneralPurposeLibrary.BehaviourManipulation;
 using UnityEngine;
@@ -10,15 +9,11 @@ namespace KeyGeneralPurposeLibrary.Powers {
       AddAsset(ClickWithWhisperOfAlliance, out _clickWithWhisperOfAllianceIndex);
       AddAsset(ClickWithCultureDeletion, out _clickWithCultureDeletionIndex);
       AddAsset(ClickWithCultureReset, out _clickWithCultureResetIndex);
-      AddAsset(ClickWithCultureTechReset, out _clickWithCultureTechResetIndex);
-      AddAsset(ClickWithCultureKnowledgeGainModification, out _clickWithCultureKnowledgeGainModificationIndex);
       AddAsset(ClickWithCultureForceSelectCulture, out _clickWithCultureForceSelectCultureIndex);
       AddAsset(ClickWithCultureForceSelectCity, out _clickWithCultureForceSelectCityIndex);
       AddAsset(ClickWithCreateNewCulture, out _clickWithCreateNewCultureIndex);
       AddAsset(ClickWithAddZoneToCity, out _clickWithAddZoneToCityIndex);
       AddAsset(ClickWithRemoveZoneFromCity, out _clickWithRemoveZoneFromCityIndex);
-      AddAsset(ClickWithAddZoneToCulture, out _clickWithAddZoneToCultureIndex);
-      AddAsset(ClickWithRemoveZoneFromCulture, out _clickWithRemoveZoneFromCultureIndex);
       AddAsset(ClickWithForceCityAsCapitalCity, out _clickWithForceCityAsCapitalCityIndex);
       AddAsset(ClickWithForceCityIntoOtherKingdom, out _clickWithForceCityIntoOtherKingdomIndex);
       AddAsset(ClickWithMakeActorKing, out _clickWithMakeActorKingIndex);
@@ -27,15 +22,11 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private static int _clickWithWhisperOfAllianceIndex;
     private static int _clickWithCultureDeletionIndex;
     private static int _clickWithCultureResetIndex;
-    private static int _clickWithCultureTechResetIndex;
-    private static int _clickWithCultureKnowledgeGainModificationIndex;
     private static int _clickWithCultureForceSelectCultureIndex;
     private static int _clickWithCultureForceSelectCityIndex;
     private static int _clickWithCreateNewCultureIndex;
     private static int _clickWithAddZoneToCityIndex;
     private static int _clickWithRemoveZoneFromCityIndex;
-    private static int _clickWithAddZoneToCultureIndex;
-    private static int _clickWithRemoveZoneFromCultureIndex;
     private static int _clickWithForceCityAsCapitalCityIndex;
     private static int _clickWithForceCityIntoOtherKingdomIndex;
     private static int _clickWithMakeActorKingIndex;
@@ -43,15 +34,11 @@ namespace KeyGeneralPurposeLibrary.Powers {
     public static int ClickWithWhisperOfAllianceIndex => _clickWithWhisperOfAllianceIndex;
     public static int ClickWithCultureDeletionIndex => _clickWithCultureDeletionIndex;
     public static int ClickWithCultureResetIndex => _clickWithCultureResetIndex;
-    public static int ClickWithCultureTechResetIndex => _clickWithCultureTechResetIndex;
-    public static int ClickWithCultureKnowledgeGainModificationIndex => _clickWithCultureKnowledgeGainModificationIndex;
     public static int ClickWithCultureForceSelectCultureIndex => _clickWithCultureForceSelectCultureIndex;
     public static int ClickWithCultureForceSelectCityIndex => _clickWithCultureForceSelectCityIndex;
     public static int ClickWithCreateNewCultureIndex => _clickWithCreateNewCultureIndex;
     public static int ClickWithAddZoneToCityIndex => _clickWithAddZoneToCityIndex;
     public static int ClickWithRemoveZoneFromCityIndex => _clickWithRemoveZoneFromCityIndex;
-    public static int ClickWithAddZoneToCultureIndex => _clickWithAddZoneToCultureIndex;
-    public static int ClickWithRemoveZoneFromCultureIndex => _clickWithRemoveZoneFromCultureIndex;
     public static int ClickWithForceCityAsCapitalCityIndex => _clickWithForceCityAsCapitalCityIndex;
     public static int ClickWithForceCityIntoOtherKingdomIndex => _clickWithForceCityIntoOtherKingdomIndex;
     public static int ClickWithMakeActorKingIndex => _clickWithMakeActorKingIndex;
@@ -163,35 +150,6 @@ namespace KeyGeneralPurposeLibrary.Powers {
       return false;
     }
 
-    private static bool ClickWithCultureTechReset(WorldTile pTile, string pPowerID) {
-      Culture cultureToReset = pTile.zone.culture;
-      if (cultureToReset != null) {
-        KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ResetCultureTech(cultureToReset);
-        WorldTip.showNow("KGPLL_CultureTechReset_Success", true, "top");
-        return true;
-      }
-
-      WorldTip.showNow("KGPLL_CultureTechReset_NoCultureSelectedError", false, "top");
-      return false;
-    }
-
-    private static bool ClickWithCultureKnowledgeGainModification(WorldTile pTile, string pPowerID) {
-      Culture cultureToIncrease = pTile.zone.culture;
-      if (cultureToIncrease != null) {
-        string modifierString = AssetManager.powers.get(pPowerID).drop_id;
-        if (int.TryParse(modifierString, NumberStyles.Integer, CultureInfo.InvariantCulture, out int modifier)) {
-          KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ModifyKnowledgeGain(cultureToIncrease, modifier);
-          WorldTip.showNow("KGPLL_CultureKnowledgeGainModification_" + (modifier > 0 ? "Increase" : "Decrease") + "Success", true, "top");
-        } else {
-          WorldTip.showNow("KGPLL_CultureKnowledgeGainModification_InvalidGainValueError", true, "top");
-          return false;
-        }
-        return true;
-      }
-      WorldTip.showNow("KGPLL_CultureKnowledgeGainModification_NoCultureSelectedError", true, "top");
-      return false;
-    }
-
     internal static Culture CultureToForceUponCity;
     private static bool ClickWithCultureForceSelectCulture(WorldTile pTile, string pPowerID) {
       Culture cultureToForce = pTile.zone.city?.culture;
@@ -273,42 +231,6 @@ namespace KeyGeneralPurposeLibrary.Powers {
         return true;
       }
       WorldTip.showNow("KGPLL_CityZoneRemoval_ZoneOwnershipConflict", true, "top");
-      return false;
-    }
-    internal static Culture CultureToAddZoneTo;
-    private static bool ClickWithAddZoneToCulture(WorldTile pTile, string pPowerID) {
-      if (CultureToAddZoneTo == null) {
-        CultureToAddZoneTo = pTile.zone.culture;
-        if (CultureToAddZoneTo != null) {
-          WorldTip.showNow("KGPLL_CultureZoneAddition_SelectZones", true, "top");
-          return false;
-        }
-        WorldTip.showNow("KGPLL_CultureZoneAddition_NoCultureSelected", true, "top");
-        return false;
-      }
-      if (pTile.zone.culture == null) {
-        CultureToAddZoneTo.addZone(pTile.zone);
-        return true;
-      }
-      WorldTip.showNow("KGPLL_CultureZoneAddition_ZoneOwnershipConflict", true, "top");
-      return false;
-    }
-    internal static Culture CultureToRemoveZoneFrom;
-    private static bool ClickWithRemoveZoneFromCulture(WorldTile pTile, string pPowerID) {
-      if (CultureToRemoveZoneFrom == null) {
-        CultureToRemoveZoneFrom = pTile.zone.culture;
-        if (CultureToRemoveZoneFrom != null) {
-          WorldTip.showNow("KGPLL_CultureZoneRemoval_SelectZones", true, "top");
-          return false;
-        }
-        WorldTip.showNow("KGPLL_CultureZoneRemoval_NoCultureSelected", true, "top");
-        return false;
-      }
-      if (pTile.zone.culture == CultureToRemoveZoneFrom) {
-        CultureToRemoveZoneFrom.removeZone(pTile.zone);
-        return true;
-      }
-      WorldTip.showNow("KGPLL_CultureZoneRemoval_ZoneOwnershipConflict", true, "top");
       return false;
     }
 
