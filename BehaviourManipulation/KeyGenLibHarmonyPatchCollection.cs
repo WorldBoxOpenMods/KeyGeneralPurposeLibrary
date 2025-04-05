@@ -80,10 +80,10 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
     }
 
     public void PatchPartnerTraitAdditions() {
-      MethodInfo original = AccessTools.Method(typeof(Actor), nameof(Actor.addTrait), new []{typeof(ActorTrait)});
+      MethodInfo original = AccessTools.Method(typeof(Actor), nameof(Actor.addTrait), new []{typeof(ActorTrait), typeof(bool)});
       MethodInfo postfix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(Actor_addTrait_Postfix));
       Harmony.Patch(original, null, new HarmonyMethod(postfix));
-      original = AccessTools.Method(typeof(Actor), nameof(Actor.removeTrait), new []{typeof(ActorTrait)});
+      original = AccessTools.Method(typeof(Actor), nameof(Actor.removeTrait), new []{typeof(ActorTrait), typeof(bool)});
       postfix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(Actor_removeTrait_Postfix));
       Harmony.Patch(original, null, new HarmonyMethod(postfix));
       original = AccessTools.Method(typeof(Actor), nameof(Actor.removeTraits));
