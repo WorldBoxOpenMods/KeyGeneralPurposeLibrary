@@ -75,8 +75,6 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Assets\KeyGenLibCustomItemManager.cs" />
-        <Compile Include="Assets\KeyGenLibCustomPlotCreator.cs" />
-        <Compile Include="Assets\KeyGenLibCustomPlotLibrary.cs" />
         <Compile Include="Assets\KeyGenLibCustomTraitManager.cs" />
         <Compile Include="Assets\KeyGenLibCustomWarTypeLibrary.cs" />
         <Compile Include="Assets\KeyGenLibDisasterAssetLibrary.cs" />

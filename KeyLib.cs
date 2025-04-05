@@ -13,8 +13,6 @@ namespace KeyGeneralPurposeLibrary {
     
     public void Awake() {
       Logger.LogInfo("Started loading KeyGeneralPurposeLibrary...");
-      LoadComponent<KeyGenLibCustomPlotCreator>();
-      LoadComponent<KeyGenLibCustomPlotLibrary>();
       LoadComponent<KeyGenLibCustomWarTypeLibrary>();
       LoadComponent<KeyGenLibRaceManipulationMethodCollection>();
       LoadComponent<KeyGenLibWorldTileManipulationMethodCollection>();
