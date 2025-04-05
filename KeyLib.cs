@@ -14,12 +14,8 @@ namespace KeyGeneralPurposeLibrary {
     public void Awake() {
       Logger.LogInfo("Started loading KeyGeneralPurposeLibrary...");
       LoadComponent<KeyGenLibCustomWarTypeLibrary>();
-      LoadComponent<KeyGenLibRaceManipulationMethodCollection>();
       LoadComponent<KeyGenLibWorldTileManipulationMethodCollection>();
       LoadComponent<KeyGenLibCultureManipulationMethodCollection>();
-      LoadComponent<KeyGenLibDisasterAssetLibrary>();
-      LoadComponent<KeyGenLibDisasterGenerator>();
-      LoadComponent<KeyGenLibWorldCleansingMethodCollection>();
       LoadComponent<KeyGenLibHarmonyPatchCollection>();
       LoadComponent<KeyGenLibFileAssetManager>();
       LoadComponent<KeyGenLibCustomTraitManager>();
