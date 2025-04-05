@@ -80,11 +80,14 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
     }
 
     public void PatchPartnerTraitAdditions() {
-      MethodInfo original = AccessTools.Method(typeof(Actor), nameof(Actor.addTrait));
+      MethodInfo original = AccessTools.Method(typeof(Actor), nameof(Actor.addTrait), new []{typeof(ActorTrait)});
       MethodInfo postfix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(Actor_addTrait_Postfix));
       Harmony.Patch(original, null, new HarmonyMethod(postfix));
-      original = AccessTools.Method(typeof(Actor), nameof(Actor.removeTrait));
+      original = AccessTools.Method(typeof(Actor), nameof(Actor.removeTrait), new []{typeof(ActorTrait)});
       postfix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(Actor_removeTrait_Postfix));
+      Harmony.Patch(original, null, new HarmonyMethod(postfix));
+      original = AccessTools.Method(typeof(Actor), nameof(Actor.removeTraits));
+      postfix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(Actor_removeTraits_Postfix));
       Harmony.Patch(original, null, new HarmonyMethod(postfix));
       original = AccessTools.Method(typeof(Actor), nameof(Actor.die));
       MethodInfo prefix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(Actor_die_prefix));
@@ -268,9 +271,8 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
       }
     }
 
-    private static void Actor_addTrait_Postfix(Actor __instance, string pTrait) {
-      ActorTrait trait = AssetManager.traits.get(pTrait);
-      if (trait is CustomTrait customTrait) {
+    private static void Actor_addTrait_Postfix(Actor __instance, ActorTrait pTrait) {
+      if (pTrait is CustomTrait customTrait) {
         foreach (ActorTrait partnerTrait in from partnerTraitId in customTrait.PartnerTraits let partnerTrait = AssetManager.traits.get(partnerTraitId) where partnerTrait != null where !__instance.hasTrait(partnerTraitId) select partnerTrait) {
           __instance.removeOppositeTraits(partnerTrait);
           __instance.data.saved_traits.Add(partnerTrait.id);
@@ -283,15 +285,20 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
       }
     }
     
-    private static void Actor_removeTrait_Postfix(Actor __instance, string pTraitID) {
-      ActorTrait trait = AssetManager.traits.get(pTraitID);
-      if (trait is CustomTrait customTrait) {
+    private static void Actor_removeTrait_Postfix(Actor __instance, ActorTrait pTrait) {
+      if (pTrait is CustomTrait customTrait) {
         if (customTrait.PartnerTraitCache.ContainsKey(__instance.data)) {
           foreach (string partnerTraitId in customTrait.PartnerTraitCache[__instance.data]) {
             __instance.removeTrait(partnerTraitId);
           }
           customTrait.PartnerTraitCache.Remove(__instance.data);
         }
+      }
+    }
+
+    private static void Actor_removeTraits_Postfix(Actor __instance, ICollection<ActorTrait> pTraits) {
+      foreach (ActorTrait trait in pTraits) {
+        Actor_removeTrait_Postfix(__instance, trait);
       }
     }
 
