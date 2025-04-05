@@ -182,8 +182,8 @@ namespace KeyGeneralPurposeLibrary.Classes {
       sb.Append(group_id);
 
       sb.Append(NameValueGroupSeparator);
-      foreach (BaseStatsContainer baseStat in base_stats.stats_list) {
-        sb.Append(baseStat.id);
+      foreach (BaseStatsContainer baseStat in base_stats._stats_list) {
+        sb.Append(MapStatNameBetween22And50(baseStat.id));
         sb.Append(NameValueSeparator);
         sb.Append(baseStat.value);
         sb.Append(NameValuePairSeparator);
@@ -191,11 +191,11 @@ namespace KeyGeneralPurposeLibrary.Classes {
 
       sb.Append("Birth");
       sb.Append(NameValueSeparator);
-      sb.Append(birth);
+      sb.Append((float)rate_birth / 100);
       sb.Append(NameValuePairSeparator);
       sb.Append("Inherit");
       sb.Append(NameValueSeparator);
-      sb.Append(inherit);
+      sb.Append((float)rate_inherit / 100);
       sb.Append(NameValueGroupSeparator);
       sb.Append(OppositeTraits.Length > 0 ? OppositeTraits.Aggregate((traitA, traitB) => traitA + NameValuePairSeparator + traitB) : "");
       sb.Append(NameValueGroupSeparator);
@@ -235,6 +235,22 @@ namespace KeyGeneralPurposeLibrary.Classes {
       return string.Join(string.Empty, words);
     }
 
+    public static string MapStatNameBetween22And50(string stat) {
+      List<(string, string)> conversions = new List<(string, string)> {
+        ("fertility", S.birth_rate),
+        ("max_age", S.lifespan)
+      };
+      foreach ((string, string) conversion in conversions) {
+        if (stat == conversion.Item1) {
+          return conversion.Item2;
+        }
+        if (stat == conversion.Item2) {
+          return conversion.Item1;
+        }
+      }
+      return stat;
+    }
+
     public void LoadTrait(string name, string author, string description, string sprite, string group, Dictionary<string, float> traitStats) {
       id = name;
       Author = author;
@@ -247,9 +263,8 @@ namespace KeyGeneralPurposeLibrary.Classes {
       base_stats[S.diplomacy] = traitStats["diplomacy"];
       base_stats[S.personality_rationality] = traitStats["personalityRationality"];
       base_stats[S.opinion] = traitStats["opinion"];
-      base_stats[S.fertility] = traitStats["fertility"];
-      base_stats[S.max_children] = traitStats["maxChildren"];
-      base_stats[S.max_age] = traitStats["maxAge"];
+      base_stats[S.birth_rate] = traitStats["fertility"];
+      base_stats[S.lifespan] = traitStats["maxAge"];
       base_stats[S.damage] = traitStats["damage"];
       base_stats[S.speed] = traitStats["speed"];
       base_stats[S.health] = traitStats["health"];
@@ -258,24 +273,13 @@ namespace KeyGeneralPurposeLibrary.Classes {
       base_stats[S.attack_speed] = traitStats["attackSpeed"];
       base_stats[S.critical_chance] = traitStats["criticalChance"];
       base_stats[S.warfare] = traitStats["warfare"];
-      base_stats[S.dodge] = traitStats["dodge"];
       base_stats[S.stewardship] = traitStats["stewardship"];
       base_stats[S.loyalty_traits] = traitStats["loyaltyTraits"];
-      base_stats[S.mod_armor] = traitStats["modArmor"];
-      base_stats[S.mod_damage] = traitStats["modDamage"];
-      base_stats[S.mod_health] = traitStats["modHealth"];
-      base_stats[S.mod_speed] = traitStats["modSpeed"];
-      base_stats[S.mod_diplomacy] = traitStats["modDiplomacy"];
-      base_stats[S.mod_crit] = traitStats["modCrit"];
-      base_stats[S.mod_attack_speed] = traitStats["modAttackSpeed"];
       base_stats[S.cities] = traitStats["cities"];
-      base_stats[S.mod_supply_timer] = traitStats["modSupplyTimer"];
       base_stats[S.accuracy] = traitStats["accuracy"];
       base_stats[S.scale] = traitStats["scale"];
-      base_stats[S.zone_range] = traitStats["zoneRange"];
       base_stats[S.range] = traitStats["range"];
       base_stats[S.bonus_towers] = traitStats["bonusTowers"];
-      base_stats[S.clan_members] = traitStats["clanMembers"];
       AddTraitToTraitLibraryWithoutSideEffects(this);
       KeyLib.Get<KeyGenLibCustomTraitManager>().AddTraitToLocalizedLibrary(id, Description);
       KeyLib.Get<KeyGenLibHarmonyPatchCollection>().NotifyOfNewTraits();
@@ -287,17 +291,16 @@ namespace KeyGeneralPurposeLibrary.Classes {
       Description = description;
       Sprite = sprite;
       group_id = group;
-      birth = birthChance;
-      inherit = inheritChance;
+      rate_birth = (int)Math.Round(birthChance * 100);
+      rate_inherit = (int)Math.Round(inheritChance * 100);
       can_be_given = true;
       can_be_removed = true;
       needs_to_be_explored = false;
       base_stats[S.diplomacy] = traitStats["diplomacy"];
       base_stats[S.personality_rationality] = traitStats["personalityRationality"];
       base_stats[S.opinion] = traitStats["opinion"];
-      base_stats[S.fertility] = traitStats["fertility"];
-      base_stats[S.max_children] = traitStats["maxChildren"];
-      base_stats[S.max_age] = traitStats["maxAge"];
+      base_stats[S.birth_rate] = traitStats["fertility"];
+      base_stats[S.lifespan] = traitStats["maxAge"];
       base_stats[S.damage] = traitStats["damage"];
       base_stats[S.speed] = traitStats["speed"];
       base_stats[S.health] = traitStats["health"];
@@ -306,24 +309,13 @@ namespace KeyGeneralPurposeLibrary.Classes {
       base_stats[S.attack_speed] = traitStats["attackSpeed"];
       base_stats[S.critical_chance] = traitStats["criticalChance"];
       base_stats[S.warfare] = traitStats["warfare"];
-      base_stats[S.dodge] = traitStats["dodge"];
       base_stats[S.stewardship] = traitStats["stewardship"];
       base_stats[S.loyalty_traits] = traitStats["loyaltyTraits"];
-      base_stats[S.mod_armor] = traitStats["modArmor"];
-      base_stats[S.mod_damage] = traitStats["modDamage"];
-      base_stats[S.mod_health] = traitStats["modHealth"];
-      base_stats[S.mod_speed] = traitStats["modSpeed"];
-      base_stats[S.mod_diplomacy] = traitStats["modDiplomacy"];
-      base_stats[S.mod_crit] = traitStats["modCrit"];
-      base_stats[S.mod_attack_speed] = traitStats["modAttackSpeed"];
       base_stats[S.cities] = traitStats["cities"];
-      base_stats[S.mod_supply_timer] = traitStats["modSupplyTimer"];
       base_stats[S.accuracy] = traitStats["accuracy"];
       base_stats[S.scale] = traitStats["scale"];
-      base_stats[S.zone_range] = traitStats["zoneRange"];
       base_stats[S.range] = traitStats["range"];
       base_stats[S.bonus_towers] = traitStats["bonusTowers"];
-      base_stats[S.clan_members] = traitStats["clanMembers"];
       AddTraitToTraitLibraryWithoutSideEffects(this);
       KeyLib.Get<KeyGenLibCustomTraitManager>().AddTraitToLocalizedLibrary(id, Description);
       KeyLib.Get<KeyGenLibHarmonyPatchCollection>().NotifyOfNewTraits();
@@ -336,17 +328,16 @@ namespace KeyGeneralPurposeLibrary.Classes {
       Sprite = sprite;
       Version = "2";
       group_id = group;
-      birth = birthChance;
-      inherit = inheritChance;
+      rate_birth = (int)Math.Round(birthChance * 100);
+      rate_inherit = (int)Math.Round(inheritChance * 100);
       can_be_given = true;
       can_be_removed = true;
       needs_to_be_explored = false;
       base_stats[S.diplomacy] = traitStats["diplomacy"];
       base_stats[S.personality_rationality] = traitStats["personalityRationality"];
       base_stats[S.opinion] = traitStats["opinion"];
-      base_stats[S.fertility] = traitStats["fertility"];
-      base_stats[S.max_children] = traitStats["maxChildren"];
-      base_stats[S.max_age] = traitStats["maxAge"];
+      base_stats[S.birth_rate] = traitStats["fertility"];
+      base_stats[S.lifespan] = traitStats["maxAge"];
       base_stats[S.damage] = traitStats["damage"];
       base_stats[S.speed] = traitStats["speed"];
       base_stats[S.health] = traitStats["health"];
@@ -355,27 +346,15 @@ namespace KeyGeneralPurposeLibrary.Classes {
       base_stats[S.attack_speed] = traitStats["attackSpeed"];
       base_stats[S.critical_chance] = traitStats["criticalChance"];
       base_stats[S.warfare] = traitStats["warfare"];
-      base_stats[S.dodge] = traitStats["dodge"];
       base_stats[S.stewardship] = traitStats["stewardship"];
       base_stats[S.loyalty_traits] = traitStats["loyaltyTraits"];
-      base_stats[S.mod_armor] = traitStats["modArmor"];
-      base_stats[S.mod_damage] = traitStats["modDamage"];
-      base_stats[S.mod_health] = traitStats["modHealth"];
-      base_stats[S.mod_speed] = traitStats["modSpeed"];
-      base_stats[S.mod_diplomacy] = traitStats["modDiplomacy"];
-      base_stats[S.mod_crit] = traitStats["modCrit"];
-      base_stats[S.mod_attack_speed] = traitStats["modAttackSpeed"];
       base_stats[S.cities] = traitStats["cities"];
-      base_stats[S.mod_supply_timer] = traitStats["modSupplyTimer"];
       base_stats[S.accuracy] = traitStats["accuracy"];
       base_stats[S.scale] = traitStats["scale"];
-      base_stats[S.zone_range] = traitStats["zoneRange"];
       base_stats[S.range] = traitStats["range"];
       base_stats[S.bonus_towers] = traitStats["bonusTowers"];
-      base_stats[S.clan_members] = traitStats["clanMembers"];
       OppositeTraits = oppositeTraits.ToArray();
-      opposite = OppositeTraits.Length > 0 ? OppositeTraits.Aggregate((traitA, traitB) => traitA + "," + traitB) : "";
-      oppositeArr = OppositeTraits.ToArray();
+      opposite_list = OppositeTraits.ToList();
       PartnerTraits = partnerTraits.ToArray();
       AddTraitToTraitLibraryWithoutSideEffects(this);
       KeyLib.Get<KeyGenLibCustomTraitManager>().AddTraitToLocalizedLibrary(id, Description);
@@ -420,16 +399,15 @@ namespace KeyGeneralPurposeLibrary.Classes {
       Debug.Log("Trying to set the base stats.");
       baseStatsPairs = baseStatsPairs.GroupBy(x => x.Key).Select(x => x.First()).ToArray();
       Dictionary<string, float> baseStatsDictionary = KeyLib.Get<KeyGenLibCustomTraitManager>().ConvertTraitStats(baseStatsPairs.ToDictionary(x => x.Key, x => x.Value));
-      birth = baseStatsDictionary["birth"];
-      inherit = baseStatsDictionary["inherit"];
+      rate_birth = (int) (baseStatsDictionary["birth"] * 100);
+      rate_inherit = (int) (baseStatsDictionary["inherit"] * 100);
       baseStatsDictionary.Remove("birth");
       baseStatsDictionary.Remove("inherit");
       for (int i = 0; i < baseStatsDictionary.Count; ++i) {
-        base_stats[baseStatsDictionary.Keys.ElementAt(i)] = baseStatsDictionary[baseStatsDictionary.Keys.ElementAt(i)];
+        base_stats[MapStatNameBetween22And50(baseStatsDictionary.Keys.ElementAt(i))] = baseStatsDictionary[baseStatsDictionary.Keys.ElementAt(i)];
       }
 
-      opposite = OppositeTraits.Length > 0 ? OppositeTraits.Aggregate((traitA, traitB) => traitA + "," + traitB) : "";
-      oppositeArr = OppositeTraits.ToArray();
+      opposite_list = OppositeTraits.ToList();
 
       AddTraitToTraitLibraryWithoutSideEffects(this);
       cached_sprite = KeyGenLibFileAssetManager.CreateSprite("KeyGUI", Sprite);
@@ -482,17 +460,17 @@ namespace KeyGeneralPurposeLibrary.Classes {
       traitDataDictionary.Remove("trait_group");
       Dictionary<string, float> traitStatsDictionary = KeyLib.Get<KeyGenLibCustomTraitManager>().ConvertTraitStats(traitDataDictionary);
       if (traitStatsDictionary.ContainsKey("birth")) {
-        birth = traitStatsDictionary["birth"];
+        rate_birth = (int) (traitStatsDictionary["birth"] * 100);
         traitStatsDictionary.Remove("birth");
       }
 
       if (traitStatsDictionary.ContainsKey("inherit")) {
-        inherit = traitStatsDictionary["inherit"];
+        rate_inherit = (int) (traitStatsDictionary["inherit"] * 100);
         traitStatsDictionary.Remove("inherit");
       }
       for (int i = 0; i < traitStatsDictionary.Count; ++i) {
         if (AssetManager.base_stats_library.dict.ContainsKey(traitStatsDictionary.Keys.ElementAt(i))) {
-          base_stats[traitStatsDictionary.Keys.ElementAt(i)] = traitStatsDictionary[traitStatsDictionary.Keys.ElementAt(i)];
+          base_stats[MapStatNameBetween22And50(traitStatsDictionary.Keys.ElementAt(i))] = traitStatsDictionary[traitStatsDictionary.Keys.ElementAt(i)];
         } else {
           Debug.LogWarning("Failed to load in stat " + traitStatsDictionary.Keys.ElementAt(i) + " for trait " + id);
         }
