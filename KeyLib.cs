@@ -20,7 +20,6 @@ namespace KeyGeneralPurposeLibrary {
       LoadComponent<KeyGenLibFileAssetManager>();
       LoadComponent<KeyGenLibCustomTraitManager>();
       LoadComponent<KeyGenLibCustomItemManager>();
-      LoadComponent<KeyGenLibWorldGenerationManipulationMethodCollection>();
       LoadComponent<KeyGenLibPowerActionWithIdLibrary>();
       LoadComponent<KeyGenLibPowerButtonClickActionLibrary>();
       LoadComponent<KeyGenLibGodPowerLibrary>();

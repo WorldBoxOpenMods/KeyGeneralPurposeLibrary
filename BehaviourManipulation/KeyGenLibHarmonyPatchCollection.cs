@@ -8,8 +8,6 @@ using KeyGeneralPurposeLibrary.Classes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
-using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
 
 // ReSharper disable InconsistentNaming
 // ReSharper disable RedundantAssignment
@@ -22,15 +20,8 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
     private static bool AllowMouseDrag { get; set; } = true;
     private static bool TraitsChanged { get; set; }
     public static bool DisableBoatMovementOnIce { get; private set; }
-    private static int RandomSeed { get; set; }
-    public static bool UseFixedRandomSeed { get; private set; }
     public static bool CrabzillaIsSpawned { get; private set; }
     public static int CrabzillaArmExplosionRadius { private get; set; } = 4;
-
-    private static System.Random _random = new System.Random();
-
-    private static System.Random _listExtensionsRandom = new System.Random();
-
 
     public void PatchTargetFramerateSetter() {
       TargetFrameRate = Application.targetFrameRate;
@@ -128,28 +119,8 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
       TraitsChanged = true;
     }
 
-    internal void SetRandomSeed(int seed) {
-      RandomSeed = seed;
-    }
-
     public static int GetCrabzillaArmExplosionRadius() {
       return CrabzillaArmExplosionRadius;
-    }
-
-    public void ToggleFixedSeedUsage() {
-      UseFixedRandomSeed = !UseFixedRandomSeed;
-      FieldInfo field = typeof(ListExtensions).GetField("rnd", BindingFlags.NonPublic | BindingFlags.Static);
-      if (field != null) {
-        if (field.GetValue(null) is System.Random random) {
-          if (random != _random) {
-            _listExtensionsRandom = random;
-            field.SetValue(null, _random);
-          } else {
-            field.SetValue(null, _listExtensionsRandom);
-            _listExtensionsRandom = new System.Random();
-          }
-        }
-      }
     }
 
     public void ToggleBoatIceMovement() {

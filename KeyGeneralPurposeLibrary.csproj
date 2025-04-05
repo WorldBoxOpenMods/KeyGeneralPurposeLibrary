@@ -80,7 +80,6 @@
         <Compile Include="Assets\KeyGenLibFileAssetManager.cs" />
         <Compile Include="BehaviourManipulation\KeyGenLibCultureManipulationMethodCollection.cs" />
         <Compile Include="BehaviourManipulation\KeyGenLibHarmonyPatchCollection.cs" />
-        <Compile Include="BehaviourManipulation\KeyGenLibWorldGenerationManipulationMethodCollection.cs" />
         <Compile Include="BehaviourManipulation\KeyGenLibWorldTileManipulationMethodCollection.cs" />
         <Compile Include="Classes\CustomDropAsset.cs" />
         <Compile Include="Classes\CustomItemAsset.cs" />
