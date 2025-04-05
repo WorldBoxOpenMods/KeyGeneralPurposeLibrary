@@ -94,36 +94,36 @@ namespace KeyGeneralPurposeLibrary.Classes {
       Author = generalInfoDictionary["item_author"];
       Sprite = generalInfoDictionary["item_sprite"];
       Version = int.Parse(generalInfoDictionary["item_version"]);
-      materials = new List<string> { generalInfoDictionary["item_material"] };
+      material = generalInfoDictionary["item_material"];
       metallic = generalInfoDictionary["item_metallic"] == "true";
       switch (generalInfoDictionary["item_equipment_type"]) {
         case "Weapon":
-          equipmentType = EquipmentType.Weapon;
+          equipment_type = EquipmentType.Weapon;
           break;
         case "Armor":
-          equipmentType = EquipmentType.Armor;
+          equipment_type = EquipmentType.Armor;
           break;
         case "Amulet":
-          equipmentType = EquipmentType.Amulet;
+          equipment_type = EquipmentType.Amulet;
           break;
         case "Boots":
-          equipmentType = EquipmentType.Boots;
+          equipment_type = EquipmentType.Boots;
           break;
         case "Helmet":
-          equipmentType = EquipmentType.Helmet;
+          equipment_type = EquipmentType.Helmet;
           break;
         case "Ring":
-          equipmentType = EquipmentType.Ring;
+          equipment_type = EquipmentType.Ring;
           break;
       }
 
       if (generalInfoDictionary["item_equipment_type"] == "Weapon") {
         switch (generalInfoDictionary["item_attack_type"]) {
           case "Melee":
-            attackType = WeaponType.Melee;
+            attack_type = WeaponType.Melee;
             break;
           case "Ranged":
-            attackType = WeaponType.Range;
+            attack_type = WeaponType.Range;
             break;
         }
       }
@@ -143,7 +143,7 @@ namespace KeyGeneralPurposeLibrary.Classes {
       path_slash_animation = "effects/slashes/slash_sword";
       name_templates = Toolbox.splitStringIntoList("sword_name#30", "sword_name_king#3", "weapon_name_city", "weapon_name_kingdom", "weapon_name_culture", "weapon_name_enemy_king", "weapon_name_enemy_kingdom");
       AssetManager.items.add(this);
-      ActorAnimationLoader.dictItems.Add("w_" + id + "_" + materials[0].ToLower(), KeyGenLibFileAssetManager.CreateSprite("KeyGUI", Sprite));
+      ActorAnimationLoader._dict_items.Add("w_" + id + "_" + material.ToLower(), new List<Sprite> {KeyGenLibFileAssetManager.CreateSprite("KeyGUI", Sprite)});
       cached_sprite = KeyGenLibFileAssetManager.CreateSprite("KeyGUI", Sprite);
       AddItemToLocalizedLibrary(generalInfoDictionary["item_name"]);
       base_stats[S.damage_range] = 0.5f;
@@ -152,19 +152,19 @@ namespace KeyGeneralPurposeLibrary.Classes {
     public void LoadItem(string name, int version, string itemMaterial, bool isMetallic, EquipmentType itemEquipmentType, WeaponType weaponType, Dictionary<string, float> baseStats, List<string> modifiers) {
       id = name;
       Version = version;
-      materials = new List<string> { itemMaterial };
+      material =  itemMaterial;
       metallic = isMetallic;
-      equipmentType = itemEquipmentType;
-      attackType = weaponType;
+      equipment_type = itemEquipmentType;
+      attack_type = weaponType;
       // TODO: Temp testing code for ranged weapons, it doesn't even work
       if (weaponType == WeaponType.Range) {
         base_stats[S.projectiles] = 1;
         base_stats[S.damage_range] = 0.9f;
         projectile = "arrow";
       }
-      base_stats.stats_dict = new Dictionary<string, BaseStatsContainer>();
-      base_stats.stats_list = new ListPool<BaseStatsContainer>();
-      base_stats.mods_list = new ListPool<BaseStatsContainer>();
+      base_stats._stats_dict = new Dictionary<string, BaseStatsContainer>();
+      base_stats._stats_list = new List<BaseStatsContainer>();
+      base_stats._multipliers_list = new List<BaseStatsContainer>();
       for (int i = 0; i < baseStats.Count; ++i) {
         try {
           base_stats[baseStats.Keys.ElementAt(i)] = baseStats[baseStats.Keys.ElementAt(i)];
@@ -173,14 +173,14 @@ namespace KeyGeneralPurposeLibrary.Classes {
         }
       }
 
-      item_modifiers = modifiers;
+      item_modifier_ids = modifiers.ToArray();
       equipment_value = 50;
       // TODO: This only works for swords.
       name_class = "item_class_weapon";
       path_slash_animation = "effects/slashes/slash_sword";
       name_templates = Toolbox.splitStringIntoList("sword_name#30", "sword_name_king#3", "weapon_name_city", "weapon_name_kingdom", "weapon_name_culture", "weapon_name_enemy_king", "weapon_name_enemy_kingdom");
       AssetManager.items.add(this);
-      ActorAnimationLoader.dictItems.Add("w_" + id + "_" + materials[0].ToLower(), KeyGenLibFileAssetManager.CreateSprite("KeyGUI", Sprite));
+      ActorAnimationLoader._dict_items.Add("w_" + id + "_" + material.ToLower(), new List<Sprite> {KeyGenLibFileAssetManager.CreateSprite("KeyGUI", Sprite)});
       cached_sprite = KeyGenLibFileAssetManager.CreateSprite("KeyGUI", Sprite);
       AddItemToLocalizedLibrary(name);
       base_stats[S.damage_range] = 0.5f;
@@ -206,7 +206,7 @@ namespace KeyGeneralPurposeLibrary.Classes {
       sb.Append(NameValuePairSeparator);
       sb.Append("ItemMaterial");
       sb.Append(NameValueSeparator);
-      sb.Append(materials[0]);
+      sb.Append(material);
       sb.Append(NameValuePairSeparator);
       sb.Append("ItemMetallic");
       sb.Append(NameValueSeparator);
@@ -214,7 +214,7 @@ namespace KeyGeneralPurposeLibrary.Classes {
       sb.Append(NameValuePairSeparator);
       sb.Append("ItemEquipmentType");
       sb.Append(NameValueSeparator);
-      switch (equipmentType) {
+      switch (equipment_type) {
         case EquipmentType.Amulet:
           sb.Append("Amulet");
           break;
@@ -235,7 +235,7 @@ namespace KeyGeneralPurposeLibrary.Classes {
           sb.Append(NameValuePairSeparator);
           sb.Append("ItemAttackType");
           sb.Append(NameValueSeparator);
-          sb.Append(attackType == WeaponType.Melee ? "Melee" : "Ranged");
+          sb.Append(attack_type == WeaponType.Melee ? "Melee" : "Ranged");
           break;
         default:
           sb.Append("Amulet");
@@ -243,7 +243,7 @@ namespace KeyGeneralPurposeLibrary.Classes {
       }
 
       sb.Append(NameValueGroupSeparator);
-      foreach (BaseStatsContainer baseStat in base_stats.stats_list) {
+      foreach (BaseStatsContainer baseStat in base_stats._stats_list) {
         sb.Append(baseStat.id);
         sb.Append(NameValueSeparator);
         sb.Append(baseStat.value);
@@ -254,7 +254,7 @@ namespace KeyGeneralPurposeLibrary.Classes {
       sb.Append(NameValueSeparator);
       sb.Append(0.5);
       sb.Append(NameValueGroupSeparator);
-      foreach (string modifier in item_modifiers) {
+      foreach (string modifier in item_modifier_ids) {
         sb.Append("ItemModifier");
         sb.Append(NameValueSeparator);
         sb.Append(modifier);
