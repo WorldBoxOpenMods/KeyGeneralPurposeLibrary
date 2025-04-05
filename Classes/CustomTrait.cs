@@ -321,15 +321,15 @@ namespace KeyGeneralPurposeLibrary.Classes {
       KeyLib.Get<KeyGenLibHarmonyPatchCollection>().NotifyOfNewTraits();
     }
 
-    public void LoadVersionOnePointTwoTrait(string name, string author, string description, string sprite, string group, float birthChance, float inheritChance, Dictionary<string, float> traitStats, List<string> oppositeTraits, List<string> partnerTraits) {
+    public void LoadVersionOnePointTwoTrait(string name, string author, string description, string sprite, string group, int birthChance, int inheritChance, Dictionary<string, float> traitStats, List<string> oppositeTraits, List<string> partnerTraits) {
       id = name;
       Author = author;
       Description = description;
       Sprite = sprite;
       Version = "2";
       group_id = group;
-      rate_birth = (int)Math.Round(birthChance * 100);
-      rate_inherit = (int)Math.Round(inheritChance * 100);
+      rate_birth = birthChance;
+      rate_inherit = inheritChance;
       can_be_given = true;
       can_be_removed = true;
       needs_to_be_explored = false;
