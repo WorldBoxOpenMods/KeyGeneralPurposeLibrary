@@ -103,7 +103,7 @@ namespace KeyGeneralPurposeLibrary.Powers {
     private readonly GodPower _whisperOfAlliance = new GodPower() {
       id = "create_alliance_keygui",
       name = "Whisper Of Alliance",
-      force_map_mode = MetaType.Alliances,
+      force_map_mode = MetaType.Alliance,
       select_button_action = KeyLib.Get<KeyGenLibPowerButtonClickActionLibrary>()[KeyGenLibPowerButtonClickActionLibrary.WhisperOfAlliancePowerButtonPressIndex],
       click_special_action = KeyLib.Get<KeyGenLibPowerActionWithIdLibrary>()[KeyGenLibPowerActionWithIdLibrary.ClickWithWhisperOfAllianceIndex]
     };
