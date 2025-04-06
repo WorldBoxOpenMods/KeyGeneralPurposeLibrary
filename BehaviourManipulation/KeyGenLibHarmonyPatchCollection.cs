@@ -275,7 +275,7 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
       if (pTrait is CustomTrait customTrait) {
         foreach (ActorTrait partnerTrait in from partnerTraitId in customTrait.PartnerTraits let partnerTrait = AssetManager.traits.get(partnerTraitId) where partnerTrait != null where !__instance.hasTrait(partnerTraitId) select partnerTrait) {
           __instance.removeOppositeTraits(partnerTrait);
-          __instance.data.saved_traits.Add(partnerTrait.id);
+          __instance.traits.Add(partnerTrait);
           __instance.setStatsDirty();
           if (!customTrait.PartnerTraitCache.ContainsKey(__instance.data)) {
             customTrait.PartnerTraitCache.Add(__instance.data, new List<string>());
@@ -303,7 +303,7 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
     }
 
     private static void Actor_die_prefix(Actor __instance) {
-      foreach (CustomTrait trait in __instance.data.saved_traits.Select(traitId => AssetManager.traits.get(traitId)).Where(trait => trait.GetType() == typeof(CustomTrait)).Cast<CustomTrait>().Where(trait => trait.PartnerTraitCache.ContainsKey(__instance.data))) {
+      foreach (CustomTrait trait in __instance.traits.Where(trait => trait.GetType() == typeof(CustomTrait)).Cast<CustomTrait>().Where(trait => trait.PartnerTraitCache.ContainsKey(__instance.data))) {
         trait.PartnerTraitCache.Remove(__instance.data);
       }
     }
