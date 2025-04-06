@@ -308,10 +308,10 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
       }
     }
 
-    private static void Actor_setClan_Prefix(Actor __instance, Clan pClan) {
-      if (pClan.units.Count >= pClan.getMaxMembers()) return;
-      if (pClan.data.custom_data_string != null) {
-        bool clanTraitsSet = pClan.data.custom_data_string.TryGetValue("ClanTraits", out string clanTraitsJson);
+    private static void Actor_setClan_Prefix(Actor __instance, Clan pObject) {
+      if (pObject.units.Count >= pObject.getMaxMembers()) return;
+      if (pObject.data.custom_data_string != null) {
+        bool clanTraitsSet = pObject.data.custom_data_string.TryGetValue("ClanTraits", out string clanTraitsJson);
         if (clanTraitsSet) {
           JToken[] clanTraitsArray = JsonConvert.DeserializeObject<JArray>(clanTraitsJson).ToArray();
           clanTraitsArray.Shuffle();
