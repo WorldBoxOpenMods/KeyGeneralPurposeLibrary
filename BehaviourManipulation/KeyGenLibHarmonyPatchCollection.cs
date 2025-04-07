@@ -49,12 +49,6 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
       Harmony.Patch(original, null, new HarmonyMethod(prefix));
     }
 
-    public void PatchGetSprite_Mood() {
-      MethodInfo original = AccessTools.Method(typeof(MoodAsset), nameof(MoodAsset.getSprite));
-      MethodInfo prefix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(getSprite_Mood_Prefix));
-      Harmony.Patch(original, new HarmonyMethod(prefix));
-    }
-
     public void PatchUpdateMouseDrag() {
       MethodInfo original = AccessTools.Method(typeof(MoveCamera), nameof(MoveCamera.updateMouseCameraDrag));
       MethodInfo prefix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(updateMouseCameraDrag_Prefix));
@@ -238,15 +232,6 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
         Sprite sprite = KeyGenLibFileAssetManager.CreateSprite(customItemAsset.Author, customItemAsset.Sprite);
         customItemAsset.cached_sprite = sprite;
         __result = sprite;
-      }
-    }
-
-    private static void getSprite_Mood_Prefix(MoodAsset __instance) {
-      if (__instance is CustomMoodAsset customMoodAsset) {
-        if (customMoodAsset.sprite == null) {
-          Sprite sprite = KeyGenLibFileAssetManager.CreateSprite(customMoodAsset.Author, customMoodAsset.Sprite);
-          customMoodAsset.sprite = sprite;
-        }
       }
     }
 
