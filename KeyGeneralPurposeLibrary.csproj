@@ -76,7 +76,6 @@
     <ItemGroup>
         <Compile Include="Assets\KeyGenLibCustomItemManager.cs" />
         <Compile Include="Assets\KeyGenLibCustomTraitManager.cs" />
-        <Compile Include="Assets\KeyGenLibCustomWarTypeLibrary.cs" />
         <Compile Include="Assets\KeyGenLibFileAssetManager.cs" />
         <Compile Include="BehaviourManipulation\KeyGenLibCultureManipulationMethodCollection.cs" />
         <Compile Include="BehaviourManipulation\KeyGenLibHarmonyPatchCollection.cs" />

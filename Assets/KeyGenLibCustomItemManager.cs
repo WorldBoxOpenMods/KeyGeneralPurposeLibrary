@@ -8,6 +8,7 @@ using KeyGeneralPurposeLibrary.Classes;
 using UnityEngine;
 
 namespace KeyGeneralPurposeLibrary.Assets {
+  [Obsolete]
   public class KeyGenLibCustomItemManager : KLibComponent {
     public void SaveItemsLocally(string modName, List<CustomItemAsset> items) {
       if (!Directory.Exists(Path.GetFullPath(Application.dataPath + "/KeyLibraryModsData/" + modName + "/Items"))) {
