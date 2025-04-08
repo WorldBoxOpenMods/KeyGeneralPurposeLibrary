@@ -81,7 +81,6 @@
         <Compile Include="BehaviourManipulation\KeyGenLibHarmonyPatchCollection.cs" />
         <Compile Include="Classes\CustomItemAsset.cs" />
         <Compile Include="Classes\CustomTrait.cs" />
-        <Compile Include="KLibAssetLibrary.cs" />
         <Compile Include="KLibComponent.cs" />
         <Compile Include="KeyGeneralPurposeLibraryConfig.cs" />
         <Compile Include="KeyLib.cs" />
