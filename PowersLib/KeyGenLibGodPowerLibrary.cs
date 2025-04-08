@@ -46,15 +46,12 @@ namespace KeyGeneralPurposeLibrary.PowersLib {
     }
     
     public T Get<T>() where T : KeyGenLibPower, new() {
-      return Components.Where(component => component is T).Cast<T>().FirstOrDefault() ?? throw new ApplicationException($"Component {typeof(T).FullName} not found!");
+      return Components.Where(component => component is T).Cast<T>().FirstOrDefault() ?? throw new ApplicationException($"Power {typeof(T).FullName} not found!");
     }
 
     public (GodPower power, PowerButton button) GetPower<T>() where T : KeyGenLibPower, new() {
       T powerComponent = Get<T>();
-      if (powerComponent != null) {
-        return (powerComponent.Power, powerComponent.Button);
-      }
-      throw new ApplicationException($"Power {typeof(T).FullName} not found!");
+      return (powerComponent.Power, powerComponent.Button);
     }
   }
 }

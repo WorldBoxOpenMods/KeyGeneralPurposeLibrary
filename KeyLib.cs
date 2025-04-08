@@ -12,26 +12,26 @@ namespace KeyGeneralPurposeLibrary {
     private static readonly List<KLibComponent> Components = new List<KLibComponent>();
     
     public void Awake() {
-      Logger.LogInfo("Started loading KeyGeneralPurposeLibrary...");
+      Logger.LogInfo($"Started loading {KeyGeneralPurposeLibraryConfig.PluginName}...");
       LoadComponent<KeyGenLibCultureManipulationMethodCollection>();
       LoadComponent<KeyGenLibHarmonyPatchCollection>();
       LoadComponent<KeyGenLibFileAssetManager>();
       LoadComponent<KeyGenLibCustomTraitManager>();
       LoadComponent<KeyGenLibCustomItemManager>();
       LoadComponent<KeyGenLibGodPowerLibrary>();
-      Logger.LogInfo("KeyGeneralPurposeLibrary finished loading successfully!");
+      Logger.LogInfo($"{KeyGeneralPurposeLibraryConfig.PluginName} finished loading successfully!");
     }
     
     private void LoadComponent<T>() where T : KLibComponent, new() {
-      Logger.LogInfo("Loading " + typeof(T).FullName + "...");
+      Logger.LogInfo($"Loading {typeof(T).FullName}...");
       try {
         Components.Add(new T());
       } catch (Exception e) {
-        Logger.LogError("Failed to load " + typeof(T).FullName + "!");
+        Logger.LogError($"Failed to load {typeof(T).FullName}!");
         Logger.LogError(e);
         return;
       }
-      Logger.LogInfo("Loaded " + typeof(T).FullName + "!");
+      Logger.LogInfo($"Loaded {typeof(T).FullName}!");
     }
 
     private void Update() {
@@ -45,7 +45,7 @@ namespace KeyGeneralPurposeLibrary {
     }
 
     public static T Get<T>() where T : KLibComponent, new() {
-      return Components.Where(component => component is T).Cast<T>().FirstOrDefault() ?? throw new ApplicationException("Component " + typeof(T).FullName + " not found!");
+      return Components.Where(component => component is T).Cast<T>().FirstOrDefault() ?? throw new ApplicationException($"Component {typeof(T).FullName} not found!");
     }
   }
 }
