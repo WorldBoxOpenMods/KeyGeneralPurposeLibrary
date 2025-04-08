@@ -86,11 +86,7 @@
         <Compile Include="KeyGeneralPurposeLibraryConfig.cs" />
         <Compile Include="KeyLib.cs" />
         <Compile Include="PowersLib\KeyGenLibPower.cs" />
-        <Compile Include="PowersLib\KeyGenLibGodPowerButtonGenerator.cs" />
-        <Compile Include="PowersLib\KeyGenLibGodPowerButtonLibrary.cs" />
         <Compile Include="PowersLib\KeyGenLibGodPowerLibrary.cs" />
-        <Compile Include="PowersLib\KeyGenLibPowerActionWithIdLibrary.cs" />
-        <Compile Include="PowersLib\KeyGenLibPowerButtonClickActionLibrary.cs" />
         <Compile Include="PowersLib\Powers\AddZoneToCity.cs" />
         <Compile Include="PowersLib\Powers\CreateNewCulture.cs" />
         <Compile Include="PowersLib\Powers\CultureDeletion.cs" />

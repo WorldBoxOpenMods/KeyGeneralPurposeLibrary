@@ -18,11 +18,7 @@ namespace KeyGeneralPurposeLibrary {
       LoadComponent<KeyGenLibFileAssetManager>();
       LoadComponent<KeyGenLibCustomTraitManager>();
       LoadComponent<KeyGenLibCustomItemManager>();
-      LoadComponent<KeyGenLibPowerActionWithIdLibrary>();
-      LoadComponent<KeyGenLibPowerButtonClickActionLibrary>();
       LoadComponent<KeyGenLibGodPowerLibrary>();
-      LoadComponent<KeyGenLibGodPowerButtonGenerator>();
-      LoadComponent<KeyGenLibGodPowerButtonLibrary>();
       Logger.LogInfo("KeyGeneralPurposeLibrary finished loading successfully!");
     }
     
