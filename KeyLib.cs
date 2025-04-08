@@ -4,7 +4,7 @@ using System.Linq;
 using BepInEx;
 using KeyGeneralPurposeLibrary.Assets;
 using KeyGeneralPurposeLibrary.BehaviourManipulation;
-using KeyGeneralPurposeLibrary.Powers;
+using KeyGeneralPurposeLibrary.PowersLib;
 
 namespace KeyGeneralPurposeLibrary {
   [BepInPlugin(KeyGeneralPurposeLibraryConfig.PluginGuid, KeyGeneralPurposeLibraryConfig.PluginName, KeyGeneralPurposeLibraryConfig.PluginVersion)]

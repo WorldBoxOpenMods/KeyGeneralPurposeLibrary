@@ -85,11 +85,26 @@
         <Compile Include="KLibComponent.cs" />
         <Compile Include="KeyGeneralPurposeLibraryConfig.cs" />
         <Compile Include="KeyLib.cs" />
-        <Compile Include="Powers\KeyGenLibGodPowerButtonGenerator.cs" />
-        <Compile Include="Powers\KeyGenLibGodPowerButtonLibrary.cs" />
-        <Compile Include="Powers\KeyGenLibGodPowerLibrary.cs" />
-        <Compile Include="Powers\KeyGenLibPowerActionWithIdLibrary.cs" />
-        <Compile Include="Powers\KeyGenLibPowerButtonClickActionLibrary.cs" />
+        <Compile Include="PowersLib\KeyGenLibPower.cs" />
+        <Compile Include="PowersLib\KeyGenLibGodPowerButtonGenerator.cs" />
+        <Compile Include="PowersLib\KeyGenLibGodPowerButtonLibrary.cs" />
+        <Compile Include="PowersLib\KeyGenLibGodPowerLibrary.cs" />
+        <Compile Include="PowersLib\KeyGenLibPowerActionWithIdLibrary.cs" />
+        <Compile Include="PowersLib\KeyGenLibPowerButtonClickActionLibrary.cs" />
+        <Compile Include="PowersLib\Powers\AddZoneToCity.cs" />
+        <Compile Include="PowersLib\Powers\CreateNewCulture.cs" />
+        <Compile Include="PowersLib\Powers\CultureDeletion.cs" />
+        <Compile Include="PowersLib\Powers\CultureForceSelectCity.cs" />
+        <Compile Include="PowersLib\Powers\CultureForceSelectCulture.cs" />
+        <Compile Include="PowersLib\Powers\CultureReset.cs" />
+        <Compile Include="PowersLib\Powers\ForceCityAsCapitalCity.cs" />
+        <Compile Include="PowersLib\Powers\ForceCityIntoOtherKingdom.cs" />
+        <Compile Include="PowersLib\Powers\MakeActorKing.cs" />
+        <Compile Include="PowersLib\Powers\MassItemAdditionRain.cs" />
+        <Compile Include="PowersLib\Powers\MassTraitRemovalRain.cs" />
+        <Compile Include="PowersLib\Powers\PlaceBuilding.cs" />
+        <Compile Include="PowersLib\Powers\RemoveZoneFromCity.cs" />
+        <Compile Include="PowersLib\Powers\WhisperOfAlliance.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
