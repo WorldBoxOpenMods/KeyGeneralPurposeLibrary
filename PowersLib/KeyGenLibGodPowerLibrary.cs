@@ -1,78 +1,60 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using KeyGeneralPurposeLibrary.PowersLib.Powers;
+using UnityEngine;
 namespace KeyGeneralPurposeLibrary.PowersLib {
-  public class KeyGenLibGodPowerLibrary : KLibAssetLibrary<GodPower> {
-    public KeyGenLibGodPowerLibrary() {
-      AddAsset(_cultureDeletion, out _cultureDeletionIndex);
-      AddAsset(_cultureReset, out _cultureResetIndex);
-      AddAsset(_cultureForceSelectCulture, out _cultureForceSelectCultureIndex);
-      AddAsset(_cultureForceSelectCity, out _cultureForceSelectCityIndex);
-      AddAsset(_createNewCulture, out _createNewCultureIndex);
-      AddAsset(_addZoneToCity, out _addZoneToCityIndex);
-      AddAsset(_removeZoneFromCity, out _removeZoneFromCityIndex);
-      AddAsset(_forceCityAsCapitalCity, out _forceCityAsCapitalCityIndex);
-      AddAsset(_forceCityIntoOtherKingdom, out _forceCityIntoOtherKingdomIndex);
-      AddAsset(_makeActorKing, out _makeActorKingIndex);
-      AddAsset(_placeBuilding, out _placeBuildingIndex);
-    }
-    private static int _whisperOfAllianceIndex;
-    private static int _massTraitRemovalRainIndex;
-    private static int _cultureDeletionIndex;
-    private static int _cultureResetIndex;
-    private static int _cultureForceSelectCultureIndex;
-    private static int _cultureForceSelectCityIndex;
-    private static int _createNewCultureIndex;
-    private static int _addZoneToCityIndex;
-    private static int _removeZoneFromCityIndex;
-    private static int _forceCityAsCapitalCityIndex;
-    private static int _forceCityIntoOtherKingdomIndex;
-    private static int _massItemAdditionRainIndex;
-    private static int _makeActorKingIndex;
-    private static int _placeBuildingIndex;
-    public static int WhisperOfAllianceIndex => _whisperOfAllianceIndex;
-    public static int MassTraitRemovalRainIndex => _massTraitRemovalRainIndex;
-    public static int CultureDeletionIndex => _cultureDeletionIndex;
-    public static int CultureResetIndex => _cultureResetIndex;
-    public static int CultureForceSelectCultureIndex => _cultureForceSelectCultureIndex;
-    public static int CultureForceSelectCityIndex => _cultureForceSelectCityIndex;
-    public static int CreateNewCultureIndex => _createNewCultureIndex;
-    public static int AddZoneToCityIndex => _addZoneToCityIndex;
-    public static int RemoveZoneFromCityIndex => _removeZoneFromCityIndex;
-    public static int ForceCityAsCapitalCityIndex => _forceCityAsCapitalCityIndex;
-    public static int ForceCityIntoOtherKingdomIndex => _forceCityIntoOtherKingdomIndex;
-    public static int MassItemAdditionRainIndex => _massItemAdditionRainIndex;
-    public static int MakeActorKingIndex => _makeActorKingIndex;
-    public static int PlaceBuildingIndex => _placeBuildingIndex;
+  public class KeyGenLibGodPowerLibrary : KLibComponent {
+    private static readonly List<KeyGenLibPower> Components = new List<KeyGenLibPower>();
 
-    internal override void Initialize() {
-      base.Initialize();
-      foreach (GodPower power in Assets) {
-        AssetManager.powers.add(power);
+    public KeyGenLibGodPowerLibrary() {
+      LoadComponent<AddZoneToCity>();
+      LoadComponent<CreateNewCulture>();
+      LoadComponent<CultureDeletion>();
+      LoadComponent<CultureForceSelectCity>();
+      LoadComponent<CultureForceSelectCulture>();
+      LoadComponent<ForceCityAsCapitalCity>();
+      LoadComponent<ForceCityIntoOtherKingdom>();
+      LoadComponent<MakeActorKing>();
+      LoadComponent<MassItemAdditionRain>();
+      LoadComponent<MassTraitRemovalRain>();
+      LoadComponent<PlaceBuilding>();
+      LoadComponent<RemoveZoneFromCity>();
+      LoadComponent<WhisperOfAlliance>();
+    }
+    
+    private static void LoadComponent<T>() where T : KeyGenLibPower, new() {
+      Debug.Log($"Loading {typeof(T).FullName}...");
+      try {
+        Components.Add(new T());
+      } catch (Exception e) {
+        Debug.LogError($"Failed to load {typeof(T).FullName}!");
+        Debug.LogError(e);
+        return;
+      }
+      Debug.Log($"Loaded {typeof(T).FullName}!");
+    }
+
+    internal override void Update() {
+      foreach (KeyGenLibPower component in Components.Where(component => component.IsInitialized == false).Where(_ => Config.game_loaded)) {
+        component.Initialize();
+      }
+
+      foreach (KeyGenLibPower component in Components) {
+        component.Update();
       }
     }
     
-    private GodPower _massTraitRemovalRain;
-    
-    private readonly GodPower _cultureDeletion;
-    
-    private readonly GodPower _cultureReset;
-    
-    private readonly GodPower _cultureForceSelectCulture;
-    
-    private readonly GodPower _cultureForceSelectCity;
-    
-    private readonly GodPower _createNewCulture;
-    
-    private readonly GodPower _addZoneToCity;
-    
-    private readonly GodPower _removeZoneFromCity;
-    
-    private readonly GodPower _forceCityAsCapitalCity;
-    
-    private readonly GodPower _forceCityIntoOtherKingdom;
-    
-    private GodPower _massItemAdditionRain;
-    
-    private readonly GodPower _makeActorKing;
-    
-    private readonly GodPower _placeBuilding;
+    public T Get<T>() where T : KeyGenLibPower, new() {
+      return Components.Where(component => component is T).Cast<T>().FirstOrDefault() ?? throw new ApplicationException($"Component {typeof(T).FullName} not found!");
+    }
+
+    public (GodPower power, PowerButton button) GetPower<T>() where T : KeyGenLibPower, new() {
+      T powerComponent = Get<T>();
+      if (powerComponent != null) {
+        return (powerComponent.Power, powerComponent.Button);
+      }
+      throw new ApplicationException($"Power {typeof(T).FullName} not found!");
+    }
   }
 }

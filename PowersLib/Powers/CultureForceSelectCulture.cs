@@ -21,8 +21,8 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       Culture cultureToForce = pTile.zone.city?.culture;
       CultureToForceUponCity = cultureToForce;
       if (cultureToForce != null) {
-        GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>()[KeyGenLibGodPowerLibrary.CultureForceSelectCityIndex];
-        PowerButton button = KeyLib.Get<KeyGenLibGodPowerButtonLibrary>()[KeyGenLibGodPowerButtonLibrary.CultureForceSelectCityButtonIndex];
+        GodPower power = KeyLib.Get<KeyGenLibGodPowerLibrary>().Get<CultureForceSelectCity>().Power;
+        PowerButton button = KeyLib.Get<KeyGenLibGodPowerLibrary>().Get<CultureForceSelectCity>().Button;
         if (button != null) {
           WorldTip.showNow("KGPLL_CultureForceConversion_SelectCity", true, "top");
           power.select_button_action(power.id);
