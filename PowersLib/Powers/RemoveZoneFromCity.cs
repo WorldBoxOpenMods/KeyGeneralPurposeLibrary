@@ -4,19 +4,17 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       id = "remove_zone_from_city_keygui",
       name = "Remove Zone From City",
       force_map_mode = MetaType.City,
-      select_button_action = RemoveZoneFromCityPowerButtonPress,
-      click_special_action = ClickWithRemoveZoneFromCity,
     }) {
     }
     private static City _cityToRemoveZoneFrom;
-    
-    private static bool RemoveZoneFromCityPowerButtonPress(string _) {
+
+    protected override bool PowerButtonPress(string pPower) {
       _cityToRemoveZoneFrom = null;
       WorldTip.showNow("KGPLL_CityZoneRemoval_SelectCity", true, "top");
       return false;
     }
-    
-    private static bool ClickWithRemoveZoneFromCity(WorldTile pTile, string pPowerID) {
+
+    protected override bool ClickWithPower(WorldTile pTile, string pPowerID) {
       if (_cityToRemoveZoneFrom == null) {
         _cityToRemoveZoneFrom = pTile.zone.city;
         if (_cityToRemoveZoneFrom != null) {

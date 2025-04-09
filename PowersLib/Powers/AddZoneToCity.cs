@@ -4,19 +4,17 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       id = "add_zone_to_city_keygui",
       name = "Add Zone To City",
       force_map_mode = MetaType.City,
-      select_button_action = AddZoneToCityPowerButtonPress,
-      click_special_action = ClickWithAddZoneToCity,
     }) {
     }
     private static City _cityToAddZoneTo;
     
-    private static bool AddZoneToCityPowerButtonPress(string _) {
+    protected override bool PowerButtonPress(string _) {
       _cityToAddZoneTo = null;
       WorldTip.showNow("KGPLL_CityZoneAddition_SelectCity", true, "top");
       return false;
     }
     
-    private static bool ClickWithAddZoneToCity(WorldTile pTile, string pPowerID) {
+    protected override bool ClickWithPower(WorldTile pTile, string pPowerID) {
       if (_cityToAddZoneTo == null) {
         _cityToAddZoneTo = pTile.zone.city;
         if (_cityToAddZoneTo != null) {

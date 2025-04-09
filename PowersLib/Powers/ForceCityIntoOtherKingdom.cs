@@ -5,22 +5,20 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       id = "force_city_into_other_kingdom_keygui",
       name = "Force City Into Other Kingdom",
       force_map_mode = MetaType.City,
-      select_button_action = ForceCityIntoOtherKingdomPowerButtonPress,
-      click_special_action = ClickWithForceCityIntoOtherKingdom
     }) {
     }
-    internal static City CityToForceIntoOtherKingdom;
-        
-    private static bool ForceCityIntoOtherKingdomPowerButtonPress(string _) {
-      CityToForceIntoOtherKingdom = null;
+    private static City _cityToForceIntoOtherKingdom;
+
+    protected override bool PowerButtonPress(string pPower) {
+      _cityToForceIntoOtherKingdom = null;
       WorldTip.showNow("KGPLL_ChangeCityKingdom_SelectCity", true, "top");
       return false;
     }
-    
-    private static bool ClickWithForceCityIntoOtherKingdom(WorldTile pTile, string pPowerID) {
-      if (CityToForceIntoOtherKingdom == null) {
-        CityToForceIntoOtherKingdom = pTile.zone.city;
-        if (CityToForceIntoOtherKingdom != null) {
+
+    protected override bool ClickWithPower(WorldTile pTile, string pPowerID) {
+      if (_cityToForceIntoOtherKingdom == null) {
+        _cityToForceIntoOtherKingdom = pTile.zone.city;
+        if (_cityToForceIntoOtherKingdom != null) {
           WorldTip.showNow("KGPLL_ChangeCityKingdom_SelectKingdom", true, "top");
           return false;
         }
@@ -28,10 +26,10 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
         return false;
       }
       if (pTile.zone.city?.kingdom != null) {
-        CityToForceIntoOtherKingdom.kingdom.cities.Remove(CityToForceIntoOtherKingdom);
-        CityToForceIntoOtherKingdom.kingdom = pTile.zone.city.kingdom;
-        CityToForceIntoOtherKingdom.kingdom.cities.Add(CityToForceIntoOtherKingdom);
-        CityToForceIntoOtherKingdom.units.ToList().ForEach(a => a.setKingdom(CityToForceIntoOtherKingdom.kingdom));
+        _cityToForceIntoOtherKingdom.kingdom.cities.Remove(_cityToForceIntoOtherKingdom);
+        _cityToForceIntoOtherKingdom.kingdom = pTile.zone.city.kingdom;
+        _cityToForceIntoOtherKingdom.kingdom.cities.Add(_cityToForceIntoOtherKingdom);
+        _cityToForceIntoOtherKingdom.units.ToList().ForEach(a => a.setKingdom(_cityToForceIntoOtherKingdom.kingdom));
         WorldTip.showNow("KGPLL_ChangeCityKingdom_Success", true, "top");
         return true;
       }

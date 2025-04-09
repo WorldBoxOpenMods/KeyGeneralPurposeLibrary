@@ -4,17 +4,15 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       id = "force_city_as_capital_city_keygui",
       name = "Force City As Capital City",
       force_map_mode = MetaType.City,
-      select_button_action = ForceCityAsCapitalCityPowerButtonPress,
-      click_special_action = ClickWithForceCityAsCapitalCity,
     }) {
     }
-        
-    private static bool ForceCityAsCapitalCityPowerButtonPress(string _) {
+
+    protected override bool PowerButtonPress(string pPower) {
       WorldTip.showNow("KGPLL_ForceCapital_SelectCity", true, "top");
       return false;
     }
-    
-    private static bool ClickWithForceCityAsCapitalCity(WorldTile pTile, string pPowerID) {
+
+    protected override bool ClickWithPower(WorldTile pTile, string pPowerID) {
       City cityToForceAsCapitalCity = pTile.zone.city;
       if (cityToForceAsCapitalCity != null) {
         cityToForceAsCapitalCity.kingdom.capital = cityToForceAsCapitalCity;

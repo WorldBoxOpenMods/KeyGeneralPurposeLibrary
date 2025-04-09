@@ -6,18 +6,17 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       id = "create_alliance_keygui",
       name = "Whisper Of Alliance",
       force_map_mode = MetaType.Alliance,
-      select_button_action = WhisperOfAlliancePowerButtonPress,
-      click_special_action = ClickWithWhisperOfAlliance,
     }) {
     }
 
-    private static bool WhisperOfAlliancePowerButtonPress(string _) {
+    protected override bool PowerButtonPress(string pPower) {
       WorldTip.showNow("KGPLL_AllianceCreation_SelectFirstKingdom", true, "top");
       Config.whisper_A = null;
       Config.whisper_B = null;
       return false;
     }
-    private static bool ClickWithWhisperOfAlliance(WorldTile pTile, string pPowerID) {
+
+    protected override bool ClickWithPower(WorldTile pTile, string pPowerID) {
       City city = pTile.zone.city;
       if (city == null) {
         return false;

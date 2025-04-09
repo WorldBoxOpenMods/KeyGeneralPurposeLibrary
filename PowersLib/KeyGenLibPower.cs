@@ -8,6 +8,8 @@ namespace KeyGeneralPurposeLibrary.PowersLib {
     public readonly PowerButton Button;
     protected KeyGenLibPower(GodPower power) {
       Power = power;
+      Power.click_special_action = ClickWithPower;
+      Power.select_button_action = PowerButtonPress;
       Sprite buttonParentSprite = KeyGenLibFileAssetManager.CreateSprite("KeyGeneralPurposeLibrary", "DefaultSprite");
       Sprite buttonSprite = KeyGenLibFileAssetManager.CreateSprite("KeyGeneralPurposeLibrary", "DefaultSprite");
       GameObject buttonParent = null;
@@ -34,5 +36,8 @@ namespace KeyGeneralPurposeLibrary.PowersLib {
       }
       AssetManager.powers.add(Power);
     }
+    
+    protected abstract bool ClickWithPower(WorldTile pTile, string pPowerID);
+    protected abstract bool PowerButtonPress(string pPower);
   }
 }

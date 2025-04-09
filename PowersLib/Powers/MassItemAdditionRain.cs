@@ -19,5 +19,13 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       sound_drawing = "event:/SFX/POWERS/GammaRain"
     }) {
     }
+
+    protected override bool PowerButtonPress(string pPower) {
+      return false;
+    }
+
+    protected override bool ClickWithPower(WorldTile pTile, string pPowerID) {
+      return false;
+    }
   }
 }

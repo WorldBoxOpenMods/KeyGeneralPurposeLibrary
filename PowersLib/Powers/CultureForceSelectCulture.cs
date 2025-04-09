@@ -5,19 +5,17 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       id = "culture_force_select_culture_keygui",
       name = "Culture Force Select Culture",
       force_map_mode = MetaType.Culture,
-      select_button_action = CultureForceSelectCulturePowerButtonPress,
-      click_special_action = ClickWithCultureForceSelectCulture
     }) {
     }
-    
-    private static bool CultureForceSelectCulturePowerButtonPress(string _) {
+
+    protected override bool PowerButtonPress(string pPower) {
       CultureToForceUponCity = null;
       WorldTip.showNow("KGPLL_CultureForceConversion_SelectCulture", true, "top");
       return false;
     }
     
     internal static Culture CultureToForceUponCity;
-    private static bool ClickWithCultureForceSelectCulture(WorldTile pTile, string pPowerID) {
+    protected override bool ClickWithPower(WorldTile pTile, string pPowerID) {
       Culture cultureToForce = pTile.zone.city?.culture;
       CultureToForceUponCity = cultureToForce;
       if (cultureToForce != null) {

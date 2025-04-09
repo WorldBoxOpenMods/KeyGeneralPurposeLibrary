@@ -7,16 +7,14 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       name = "Culture Wipe",
       force_map_mode = MetaType.Culture,
     }) {
-      Power.select_button_action = CultureDeletionPowerButtonPress;
-      Power.click_special_action = ClickWithCultureDeletion;
     }
-    
-    private bool CultureDeletionPowerButtonPress(string _) {
+
+    protected override bool PowerButtonPress(string pPower) {
       WorldTip.showNow("KGPLL_CultureDeletion_SelectCulture", true, "top");
       return false;
     }
-    
-    private bool ClickWithCultureDeletion(WorldTile pTile, string pPowerID) {
+
+    protected override bool ClickWithPower(WorldTile pTile, string pPowerID) {
       Culture cultureToWipe = pTile.zone.city?.culture;
       if (cultureToWipe != null) {
         DeleteCulture(cultureToWipe);

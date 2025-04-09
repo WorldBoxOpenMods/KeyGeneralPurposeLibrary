@@ -8,16 +8,14 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       name = "Culture Reset",
       force_map_mode = MetaType.Culture,
     }) {
-      Power.select_button_action = CultureResetPowerButtonPress;
-      Power.click_special_action = ClickWithCultureReset;
     }
-    
-    private bool CultureResetPowerButtonPress(string _) {
+
+    protected override bool PowerButtonPress(string pPower) {
       WorldTip.showNow("KGPLL_CultureFullReset_SelectCulture", true, "top");
       return false;
     }
-    
-    private bool ClickWithCultureReset(WorldTile pTile, string pPowerID) {
+
+    protected override bool ClickWithPower(WorldTile pTile, string pPowerID) {
       Culture cultureToReset = pTile.zone.city?.culture;
       if (cultureToReset != null) {
         ResetCulture(cultureToReset);

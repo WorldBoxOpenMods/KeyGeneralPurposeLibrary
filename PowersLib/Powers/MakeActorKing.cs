@@ -5,16 +5,15 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       id = "make_actor_king_keygui",
       name = "Make Actor King",
       force_map_mode = MetaType.None,
-      select_button_action = MakeActorKingPowerButtonPress,
-      click_special_action = ClickWithMakeActorKing,
     }) {
     }
-        
-    private static bool MakeActorKingPowerButtonPress(string _) {
+
+    protected override bool PowerButtonPress(string pPower) {
       WorldTip.showNow("KGPLL_SetKing_SelectActor", true, "top");
       return false;
     }
-    private static bool ClickWithMakeActorKing(WorldTile pTile, string pPowerID) {
+
+    protected override bool ClickWithPower(WorldTile pTile, string pPowerID) {
       Actor actorToMakeKing = pTile._units.FirstOrDefault(a => a.kingdom?.isCiv() ?? false);
       if (actorToMakeKing != null) {
         if (actorToMakeKing.kingdom != null) {

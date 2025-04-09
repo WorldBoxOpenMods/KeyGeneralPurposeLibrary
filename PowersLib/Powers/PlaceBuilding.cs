@@ -4,17 +4,15 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       id = "place_building_keygui",
       name = "Place Building",
       force_map_mode = MetaType.None,
-      select_button_action = PlaceBuildingPowerButtonPress,
-      click_special_action = ClickWithPlaceBuilding,
     }) {
     }
-        
-    private static bool PlaceBuildingPowerButtonPress(string _) {
+
+    protected override bool PowerButtonPress(string pPower) {
       WorldTip.showNow("KGPLL_PlaceBuilding_SelectCity", true, "top");
       return false;
     }
-    
-    private static bool ClickWithPlaceBuilding(WorldTile pTile, string pPowerID) {
+
+    protected override bool ClickWithPower(WorldTile pTile, string pPowerID) {
       BuildingAsset buildingToPlace = AssetManager.buildings.get(AssetManager.powers.get(pPowerID).drop_id);
       if (buildingToPlace != null) {
         Building newBuilding = World.world.buildings.addBuilding(buildingToPlace.id, pTile);
