@@ -5,28 +5,28 @@ using KeyGeneralPurposeLibrary.PowersLib.Powers;
 using UnityEngine;
 namespace KeyGeneralPurposeLibrary.PowersLib {
   public class KeyGenLibGodPowerLibrary : KLibComponent {
-    private static readonly List<KeyGenLibPower> Components = new List<KeyGenLibPower>();
+    private static readonly List<KeyGenLibPower> Powers = new List<KeyGenLibPower>();
 
     public KeyGenLibGodPowerLibrary() {
-      LoadComponent<AddZoneToCity>();
-      LoadComponent<CreateNewCulture>();
-      LoadComponent<CultureDeletion>();
-      LoadComponent<CultureForceSelectCity>();
-      LoadComponent<CultureForceSelectCulture>();
-      LoadComponent<ForceCityAsCapitalCity>();
-      LoadComponent<ForceCityIntoOtherKingdom>();
-      LoadComponent<MakeActorKing>();
-      LoadComponent<MassItemAdditionRain>();
-      LoadComponent<MassTraitRemovalRain>();
-      LoadComponent<PlaceBuilding>();
-      LoadComponent<RemoveZoneFromCity>();
-      LoadComponent<WhisperOfAlliance>();
+      LoadPower<AddZoneToCity>();
+      LoadPower<CreateNewCulture>();
+      LoadPower<CultureDeletion>();
+      LoadPower<CultureForceSelectCity>();
+      LoadPower<CultureForceSelectCulture>();
+      LoadPower<ForceCityAsCapitalCity>();
+      LoadPower<ForceCityIntoOtherKingdom>();
+      LoadPower<MakeActorKing>();
+      LoadPower<MassItemAdditionRain>();
+      LoadPower<MassTraitRemovalRain>();
+      LoadPower<PlaceBuilding>();
+      LoadPower<RemoveZoneFromCity>();
+      LoadPower<WhisperOfAlliance>();
     }
     
-    private static void LoadComponent<T>() where T : KeyGenLibPower, new() {
+    private static void LoadPower<T>() where T : KeyGenLibPower, new() {
       Debug.Log($"Loading {typeof(T).FullName}...");
       try {
-        Components.Add(new T());
+        Powers.Add(new T());
       } catch (Exception e) {
         Debug.LogError($"Failed to load {typeof(T).FullName}!");
         Debug.LogError(e);
@@ -36,17 +36,17 @@ namespace KeyGeneralPurposeLibrary.PowersLib {
     }
 
     internal override void Update() {
-      foreach (KeyGenLibPower component in Components.Where(component => component.IsInitialized == false).Where(_ => Config.game_loaded)) {
-        component.Initialize();
+      foreach (KeyGenLibPower power in Powers.Where(power => power.IsInitialized == false).Where(_ => Config.game_loaded)) {
+        power.Initialize();
       }
 
-      foreach (KeyGenLibPower component in Components) {
-        component.Update();
+      foreach (KeyGenLibPower power in Powers) {
+        power.Update();
       }
     }
     
     public T Get<T>() where T : KeyGenLibPower, new() {
-      return Components.Where(component => component is T).Cast<T>().FirstOrDefault() ?? throw new ApplicationException($"Power {typeof(T).FullName} not found!");
+      return Powers.Where(power => power is T).Cast<T>().FirstOrDefault() ?? throw new ApplicationException($"Power {typeof(T).FullName} not found!");
     }
 
     public (GodPower power, PowerButton button) GetPower<T>() where T : KeyGenLibPower, new() {
