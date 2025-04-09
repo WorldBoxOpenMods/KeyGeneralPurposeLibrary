@@ -1,30 +1,43 @@
-using KeyGeneralPurposeLibrary.BehaviourManipulation;
+using System.Linq;
+
 namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
   public class CultureDeletion : KeyGenLibPower {
     public CultureDeletion() : base(new GodPower() {
       id = "culture_wipe_keygui",
       name = "Culture Wipe",
       force_map_mode = MetaType.Culture,
-      select_button_action = CultureDeletionPowerButtonPress,
-      click_special_action = ClickWithCultureDeletion,
     }) {
+      Power.select_button_action = CultureDeletionPowerButtonPress;
+      Power.click_special_action = ClickWithCultureDeletion;
     }
     
-    private static bool CultureDeletionPowerButtonPress(string _) {
+    private bool CultureDeletionPowerButtonPress(string _) {
       WorldTip.showNow("KGPLL_CultureDeletion_SelectCulture", true, "top");
       return false;
     }
     
-    private static bool ClickWithCultureDeletion(WorldTile pTile, string pPowerID) {
+    private bool ClickWithCultureDeletion(WorldTile pTile, string pPowerID) {
       Culture cultureToWipe = pTile.zone.city?.culture;
       if (cultureToWipe != null) {
-        KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().DeleteCulture(cultureToWipe);
+        DeleteCulture(cultureToWipe);
         WorldTip.showNow("KGPLL_CultureDeletion_Success", true, "top");
         return true;
       }
 
       WorldTip.showNow("KGPLL_CultureDeletion_NoCultureSelectedError", true, "top");
       return false;
+    }
+    
+    public void DeleteCulture(Culture targetCulture) {
+      foreach (City city in targetCulture.cities.ToList()) {
+        city.setCulture(null);
+      }
+      for (int i = 0; i < World.world.units.ToList().Count; ++i) {
+        if (World.world.units.ToList()[i].culture == targetCulture) {
+          World.world.units.ToList()[i].setCulture(null);
+        }
+      }
+      World.world.cultures.removeObject(targetCulture);
     }
   }
 }

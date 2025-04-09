@@ -13,7 +13,6 @@ namespace KeyGeneralPurposeLibrary {
     
     public void Awake() {
       Logger.LogInfo($"Started loading {KeyGeneralPurposeLibraryConfig.PluginName}...");
-      LoadComponent<KeyGenLibCultureManipulationMethodCollection>();
       LoadComponent<KeyGenLibHarmonyPatchCollection>();
       LoadComponent<KeyGenLibFileAssetManager>();
       LoadComponent<KeyGenLibCustomTraitManager>();

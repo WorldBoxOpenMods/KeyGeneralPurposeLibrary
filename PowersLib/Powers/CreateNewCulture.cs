@@ -19,7 +19,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       City cityToCreateCultureFor = pTile.zone.city;
       if (cityToCreateCultureFor != null) {
         Culture newCulture = World.world.cultures.newCulture(cityToCreateCultureFor.leader);
-        KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ForceCultureOnCity(newCulture, cityToCreateCultureFor);
+        KeyLib.Get<KeyGenLibGodPowerLibrary>().Get<CultureForceSelectCity>().ForceCultureOnCity(newCulture, cityToCreateCultureFor);
         WorldTip.showNow("KGPLL_CultureCreation_Success", true, "top");
         return true;
       }

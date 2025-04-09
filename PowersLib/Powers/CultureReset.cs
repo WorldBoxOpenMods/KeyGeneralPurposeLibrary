@@ -1,30 +1,45 @@
-using KeyGeneralPurposeLibrary.BehaviourManipulation;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
   public class CultureReset : KeyGenLibPower {
     public CultureReset() : base(new GodPower() {
       id = "culture_reset_keygui",
       name = "Culture Reset",
       force_map_mode = MetaType.Culture,
-      select_button_action = CultureResetPowerButtonPress,
-      click_special_action = ClickWithCultureReset,
     }) {
+      Power.select_button_action = CultureResetPowerButtonPress;
+      Power.click_special_action = ClickWithCultureReset;
     }
     
-    private static bool CultureResetPowerButtonPress(string _) {
+    private bool CultureResetPowerButtonPress(string _) {
       WorldTip.showNow("KGPLL_CultureFullReset_SelectCulture", true, "top");
       return false;
     }
     
-    private static bool ClickWithCultureReset(WorldTile pTile, string pPowerID) {
+    private bool ClickWithCultureReset(WorldTile pTile, string pPowerID) {
       Culture cultureToReset = pTile.zone.city?.culture;
       if (cultureToReset != null) {
-        KeyLib.Get<KeyGenLibCultureManipulationMethodCollection>().ResetCulture(cultureToReset);
+        ResetCulture(cultureToReset);
         WorldTip.showNow("KGPLL_CultureFullReset_Success", true, "top");
         return true;
       }
 
       WorldTip.showNow("KGPLL_CultureFullReset_NoCultureSelectedError", true, "top");
       return false;
+    }
+    
+    public void ResetCulture(Culture culture) {
+      List<City> cities = culture.cities.ToList();
+      Actor newFounder = culture.units.First();
+      KeyLib.Get<KeyGenLibGodPowerLibrary>().Get<CultureDeletion>().DeleteCulture(culture);
+      Culture newCulture = World.world.cultures.newCulture(newFounder);
+      foreach (City t in cities) {
+        t.setCulture(newCulture);
+      }
+      foreach (Actor unit in culture.units) {
+        unit.setCulture(newCulture);
+      }
     }
   }
 }
