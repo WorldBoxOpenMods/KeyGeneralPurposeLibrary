@@ -6,7 +6,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
     public CultureReset() : base(new GodPower() {
       id = "culture_reset_keygui",
       name = "Culture Reset",
-      force_map_mode = MetaType.Culture,
+      force_map_mode = MetaType.Culture
     }) {
     }
 
@@ -26,7 +26,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       WorldTip.showNow("KGPLL_CultureFullReset_NoCultureSelectedError", true, "top");
       return false;
     }
-    
+
     public void ResetCulture(Culture culture) {
       List<City> cities = culture.cities.ToList();
       Actor newFounder = culture.units.First();

@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+
 namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
   public class WhisperOfAlliance : KeyGenLibPower {
     public WhisperOfAlliance() : base(new GodPower() {
       id = "create_alliance_keygui",
       name = "Whisper Of Alliance",
-      force_map_mode = MetaType.Alliance,
+      force_map_mode = MetaType.Alliance
     }) {
     }
 

@@ -68,25 +68,25 @@ namespace KeyGeneralPurposeLibrary.Classes {
         item = ConvertVersionOneItemToVersionTwo(item);
       }
 
-      string[] groups = item.Split(new[] { NameValueGroupSeparator }, StringSplitOptions.None);
-      string[] generalInfo = groups[0].Split(new[] { NameValuePairSeparator }, StringSplitOptions.None);
+      string[] groups = item.Split(new[] {NameValueGroupSeparator}, StringSplitOptions.None);
+      string[] generalInfo = groups[0].Split(new[] {NameValuePairSeparator}, StringSplitOptions.None);
       KeyValuePair<string, string>[] generalInfoPairs = new KeyValuePair<string, string>[generalInfo.Length];
       for (int i = 0; i < generalInfo.Length; i++) {
-        string[] pair = generalInfo[i].Split(new[] { NameValueSeparator }, StringSplitOptions.None);
+        string[] pair = generalInfo[i].Split(new[] {NameValueSeparator}, StringSplitOptions.None);
         generalInfoPairs[i] = new KeyValuePair<string, string>(ConvertToSnakeCase(pair[0]), pair[1]);
       }
 
-      string[] baseStats = groups[1].Split(new[] { NameValuePairSeparator }, StringSplitOptions.None);
+      string[] baseStats = groups[1].Split(new[] {NameValuePairSeparator}, StringSplitOptions.None);
       KeyValuePair<string, string>[] baseStatsPairs = new KeyValuePair<string, string>[baseStats.Length];
       for (int i = 0; i < baseStats.Length; i++) {
-        string[] pair = baseStats[i].Split(new[] { NameValueSeparator }, StringSplitOptions.None);
+        string[] pair = baseStats[i].Split(new[] {NameValueSeparator}, StringSplitOptions.None);
         baseStatsPairs[i] = new KeyValuePair<string, string>(ConvertToSnakeCase(pair[0]), pair[1]);
       }
 
-      string[] modifiers = groups[2].Split(new[] { NameValuePairSeparator }, StringSplitOptions.None);
+      string[] modifiers = groups[2].Split(new[] {NameValuePairSeparator}, StringSplitOptions.None);
       KeyValuePair<string, string>[] modifierPairs = new KeyValuePair<string, string>[modifiers.Length];
       for (int i = 0; i < modifiers.Length; i++) {
-        string[] pair = modifiers[i].Split(new[] { NameValueSeparator }, StringSplitOptions.None);
+        string[] pair = modifiers[i].Split(new[] {NameValueSeparator}, StringSplitOptions.None);
         modifierPairs[i] = new KeyValuePair<string, string>(ConvertToSnakeCase(pair[0]), pair[1]);
       }
 
@@ -153,7 +153,7 @@ namespace KeyGeneralPurposeLibrary.Classes {
     public void LoadItem(string name, int version, string itemMaterial, bool isMetallic, EquipmentType itemEquipmentType, WeaponType weaponType, Dictionary<string, float> baseStats, List<string> modifiers) {
       id = name;
       Version = version;
-      material =  itemMaterial;
+      material = itemMaterial;
       metallic = isMetallic;
       equipment_type = itemEquipmentType;
       attack_type = weaponType;

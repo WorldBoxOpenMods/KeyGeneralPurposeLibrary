@@ -36,7 +36,7 @@ namespace KeyGeneralPurposeLibrary.Assets {
           }
         }
 
-        string[] itemDataArray = itemData.Split(new[] { "<+|-|-|+>" }, StringSplitOptions.RemoveEmptyEntries);
+        string[] itemDataArray = itemData.Split(new[] {"<+|-|-|+>"}, StringSplitOptions.RemoveEmptyEntries);
         foreach (string itemDataString in itemDataArray) {
           CustomItemAsset item = new CustomItemAsset();
           items.Add(item);

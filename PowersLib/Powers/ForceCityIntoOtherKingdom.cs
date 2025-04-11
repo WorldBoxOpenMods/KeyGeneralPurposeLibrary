@@ -1,10 +1,11 @@
 using System.Linq;
+
 namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
   public class ForceCityIntoOtherKingdom : KeyGenLibPower {
     public ForceCityIntoOtherKingdom() : base(new GodPower() {
       id = "force_city_into_other_kingdom_keygui",
       name = "Force City Into Other Kingdom",
-      force_map_mode = MetaType.City,
+      force_map_mode = MetaType.City
     }) {
     }
     private static City _cityToForceIntoOtherKingdom;

@@ -74,10 +74,10 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
     }
 
     public void PatchPartnerTraitAdditions() {
-      MethodInfo original = AccessTools.Method(typeof(Actor), nameof(Actor.addTrait), new []{typeof(ActorTrait), typeof(bool)});
+      MethodInfo original = AccessTools.Method(typeof(Actor), nameof(Actor.addTrait), new[] {typeof(ActorTrait), typeof(bool)});
       MethodInfo postfix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(Actor_addTrait_Postfix));
       Harmony.Patch(original, null, new HarmonyMethod(postfix));
-      original = AccessTools.Method(typeof(Actor), nameof(Actor.removeTrait), new []{typeof(ActorTrait)});
+      original = AccessTools.Method(typeof(Actor), nameof(Actor.removeTrait), new[] {typeof(ActorTrait)});
       postfix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(Actor_removeTrait_Postfix));
       Harmony.Patch(original, null, new HarmonyMethod(postfix));
       original = AccessTools.Method(typeof(Actor), nameof(Actor.removeTraits));
@@ -93,7 +93,7 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
       MethodInfo prefix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(Actor_setClan_Prefix));
       Harmony.Patch(original, new HarmonyMethod(prefix));
     }
-    
+
     public void PatchCultureTraitAdditions() {
       MethodInfo original = AccessTools.Method(typeof(Actor), nameof(Actor.setCulture));
       MethodInfo prefix = AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(setCulture_Prefix));
@@ -246,7 +246,7 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
     private static IEnumerable<CodeInstruction> CrabArm_damageWorld_Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator) {
       LocalBuilder builder = generator.DeclareLocal(typeof(int));
       foreach (CodeInstruction instruction in instructions) {
-        if (instruction.opcode == OpCodes.Ldc_I4_4 || (instruction.opcode == OpCodes.Ldc_I4 && (int)instruction.operand == 4)) {
+        if (instruction.opcode == OpCodes.Ldc_I4_4 || instruction.opcode == OpCodes.Ldc_I4 && (int)instruction.operand == 4) {
           yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(KeyGenLibHarmonyPatchCollection), nameof(GetCrabzillaArmExplosionRadius)));
           yield return new CodeInstruction(OpCodes.Stloc_S, builder.LocalIndex);
           yield return new CodeInstruction(OpCodes.Ldloc_S, builder.LocalIndex);
@@ -269,7 +269,7 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
         }
       }
     }
-    
+
     private static void Actor_removeTrait_Postfix(Actor __instance, ActorTrait pTrait) {
       if (pTrait is CustomTrait customTrait) {
         if (customTrait.PartnerTraitCache.ContainsKey(__instance.data)) {
@@ -306,7 +306,7 @@ namespace KeyGeneralPurposeLibrary.BehaviourManipulation {
         }
       }
     }
-    
+
     private static void setCulture_Prefix(Actor __instance, Culture pCulture) {
       if (pCulture.data.custom_data_string != null) {
         bool cultureTraitsSet = pCulture.data.custom_data_string.TryGetValue("CultureTraits", out string cultureTraitsJson);

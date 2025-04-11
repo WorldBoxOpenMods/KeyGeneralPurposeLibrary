@@ -5,7 +5,7 @@ namespace KeyGeneralPurposeLibrary {
     internal virtual void Initialize() {
       IsInitialized = true;
     }
-    
+
     internal virtual void Update() { }
   }
 }

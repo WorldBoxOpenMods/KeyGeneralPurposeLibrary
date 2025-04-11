@@ -1,10 +1,11 @@
 using UnityEngine;
+
 namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
   public class CultureForceSelectCulture : KeyGenLibPower {
     public CultureForceSelectCulture() : base(new GodPower() {
       id = "culture_force_select_culture_keygui",
       name = "Culture Force Select Culture",
-      force_map_mode = MetaType.Culture,
+      force_map_mode = MetaType.Culture
     }) {
     }
 
@@ -13,7 +14,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       WorldTip.showNow("KGPLL_CultureForceConversion_SelectCulture", true, "top");
       return false;
     }
-    
+
     internal static Culture CultureToForceUponCity;
     protected override bool ClickWithPower(WorldTile pTile, string pPowerID) {
       Culture cultureToForce = pTile.zone.city?.culture;

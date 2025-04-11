@@ -3,7 +3,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
     public CreateNewCulture() : base(new GodPower() {
       id = "create_new_culture_keygui",
       name = "Create New Culture",
-      force_map_mode = MetaType.City,
+      force_map_mode = MetaType.City
     }) {
     }
 

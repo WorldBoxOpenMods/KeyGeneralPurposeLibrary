@@ -5,7 +5,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
     public CultureDeletion() : base(new GodPower() {
       id = "culture_wipe_keygui",
       name = "Culture Wipe",
-      force_map_mode = MetaType.Culture,
+      force_map_mode = MetaType.Culture
     }) {
     }
 
@@ -25,7 +25,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       WorldTip.showNow("KGPLL_CultureDeletion_NoCultureSelectedError", true, "top");
       return false;
     }
-    
+
     public void DeleteCulture(Culture targetCulture) {
       foreach (City city in targetCulture.cities.ToList()) {
         city.setCulture(null);

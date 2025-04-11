@@ -3,7 +3,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
     public CultureForceSelectCity() : base(new GodPower() {
       id = "culture_force_select_city_keygui",
       name = "Culture Force Select City",
-      force_map_mode = MetaType.City,
+      force_map_mode = MetaType.City
     }) {
     }
 
@@ -26,7 +26,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       WorldTip.showNow("KGPLL_CultureForceConversion_NoCitySelectedError", true, "top");
       return false;
     }
-    
+
     public void ForceCultureOnCity(Culture citySelectionTargetCulture, City city) {
       Culture currentCityCulture = city.getCulture();
       currentCityCulture?.cities.Remove(city);

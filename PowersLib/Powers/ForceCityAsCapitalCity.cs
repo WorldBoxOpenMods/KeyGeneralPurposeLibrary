@@ -3,7 +3,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
     public ForceCityAsCapitalCity() : base(new GodPower() {
       id = "force_city_as_capital_city_keygui",
       name = "Force City As Capital City",
-      force_map_mode = MetaType.City,
+      force_map_mode = MetaType.City
     }) {
     }
 

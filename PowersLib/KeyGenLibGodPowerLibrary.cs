@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using KeyGeneralPurposeLibrary.PowersLib.Powers;
 using UnityEngine;
+
 namespace KeyGeneralPurposeLibrary.PowersLib {
   public class KeyGenLibGodPowerLibrary : KLibComponent {
     private static readonly List<KeyGenLibPower> Powers = new List<KeyGenLibPower>();
@@ -22,7 +23,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib {
       LoadPower<RemoveZoneFromCity>();
       LoadPower<WhisperOfAlliance>();
     }
-    
+
     private static void LoadPower<T>() where T : KeyGenLibPower, new() {
       Debug.Log($"Loading {typeof(T).FullName}...");
       try {
@@ -44,7 +45,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib {
         power.Update();
       }
     }
-    
+
     public T Get<T>() where T : KeyGenLibPower, new() {
       return Powers.Where(power => power is T).Cast<T>().FirstOrDefault() ?? throw new ApplicationException($"Power {typeof(T).FullName} not found!");
     }

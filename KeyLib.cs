@@ -10,7 +10,7 @@ namespace KeyGeneralPurposeLibrary {
   [BepInPlugin(KeyGeneralPurposeLibraryConfig.PluginGuid, KeyGeneralPurposeLibraryConfig.PluginName, KeyGeneralPurposeLibraryConfig.PluginVersion)]
   public class KeyLib : BaseUnityPlugin {
     private static readonly List<KLibComponent> Components = new List<KLibComponent>();
-    
+
     public void Awake() {
       Logger.LogInfo($"Started loading {KeyGeneralPurposeLibraryConfig.PluginName}...");
       LoadComponent<KeyGenLibHarmonyPatchCollection>();
@@ -20,7 +20,7 @@ namespace KeyGeneralPurposeLibrary {
       LoadComponent<KeyGenLibGodPowerLibrary>();
       Logger.LogInfo($"{KeyGeneralPurposeLibraryConfig.PluginName} finished loading successfully!");
     }
-    
+
     private void LoadComponent<T>() where T : KLibComponent, new() {
       Logger.LogInfo($"Loading {typeof(T).FullName}...");
       try {

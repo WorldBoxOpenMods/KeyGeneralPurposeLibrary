@@ -3,7 +3,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
     public RemoveZoneFromCity() : base(new GodPower() {
       id = "remove_zone_from_city_keygui",
       name = "Remove Zone From City",
-      force_map_mode = MetaType.City,
+      force_map_mode = MetaType.City
     }) {
     }
     private static City _cityToRemoveZoneFrom;

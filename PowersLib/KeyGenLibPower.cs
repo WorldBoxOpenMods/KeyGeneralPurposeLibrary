@@ -2,6 +2,7 @@ using System.Linq;
 using KeyGeneralPurposeLibrary.Assets;
 using UnityEngine;
 using UnityEngine.UI;
+
 namespace KeyGeneralPurposeLibrary.PowersLib {
   public abstract class KeyGenLibPower : KLibComponent {
     public readonly GodPower Power;
@@ -36,7 +37,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib {
       }
       AssetManager.powers.add(Power);
     }
-    
+
     protected abstract bool ClickWithPower(WorldTile pTile, string pPowerID);
     protected abstract bool PowerButtonPress(string pPower);
   }

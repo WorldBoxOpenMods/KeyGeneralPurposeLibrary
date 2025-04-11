@@ -28,7 +28,7 @@ namespace KeyGeneralPurposeLibrary.Classes {
     }
 
     public CustomTrait() { }
-    
+
     // Old V1.1 format
     /*
     public override string ToString() {
@@ -368,24 +368,24 @@ namespace KeyGeneralPurposeLibrary.Classes {
         return;
       }
 
-      string[] groups = trait.Split(new[] { NameValueGroupSeparator }, StringSplitOptions.None);
-      string[] generalInfo = groups[0].Split(new[] { NameValuePairSeparator }, StringSplitOptions.None);
+      string[] groups = trait.Split(new[] {NameValueGroupSeparator}, StringSplitOptions.None);
+      string[] generalInfo = groups[0].Split(new[] {NameValuePairSeparator}, StringSplitOptions.None);
       KeyValuePair<string, string>[] generalInfoPairs = new KeyValuePair<string, string>[generalInfo.Length];
       for (int i = 0; i < generalInfo.Length; i++) {
-        string[] pair = generalInfo[i].Split(new[] { NameValueSeparator }, StringSplitOptions.None);
+        string[] pair = generalInfo[i].Split(new[] {NameValueSeparator}, StringSplitOptions.None);
         generalInfoPairs[i] = new KeyValuePair<string, string>(ConvertToSnakeCase(pair[0]), pair[1]);
       }
 
-      string[] baseStats = groups[1].Split(new[] { NameValuePairSeparator }, StringSplitOptions.None);
+      string[] baseStats = groups[1].Split(new[] {NameValuePairSeparator}, StringSplitOptions.None);
       KeyValuePair<string, string>[] baseStatsPairs = new KeyValuePair<string, string>[baseStats.Length];
       for (int i = 0; i < baseStats.Length; i++) {
-        string[] pair = baseStats[i].Split(new[] { NameValueSeparator }, StringSplitOptions.None);
+        string[] pair = baseStats[i].Split(new[] {NameValueSeparator}, StringSplitOptions.None);
         baseStatsPairs[i] = new KeyValuePair<string, string>(ConvertToSnakeCase(pair[0]), pair[1]);
       }
 
-      OppositeTraits = groups[2].Split(new[] { NameValuePairSeparator }, StringSplitOptions.None);
+      OppositeTraits = groups[2].Split(new[] {NameValuePairSeparator}, StringSplitOptions.None);
 
-      PartnerTraits = groups[3].Split(new[] { NameValuePairSeparator }, StringSplitOptions.None);
+      PartnerTraits = groups[3].Split(new[] {NameValuePairSeparator}, StringSplitOptions.None);
 
 
       Dictionary<string, string> generalInfoDictionary = generalInfoPairs.ToDictionary(x => x.Key, x => x.Value);
@@ -399,8 +399,8 @@ namespace KeyGeneralPurposeLibrary.Classes {
       Debug.Log("Trying to set the base stats.");
       baseStatsPairs = baseStatsPairs.GroupBy(x => x.Key).Select(x => x.First()).ToArray();
       Dictionary<string, float> baseStatsDictionary = KeyLib.Get<KeyGenLibCustomTraitManager>().ConvertTraitStats(baseStatsPairs.ToDictionary(x => x.Key, x => x.Value));
-      rate_birth = (int) (baseStatsDictionary["birth"] * 100);
-      rate_inherit = (int) (baseStatsDictionary["inherit"] * 100);
+      rate_birth = (int)(baseStatsDictionary["birth"] * 100);
+      rate_inherit = (int)(baseStatsDictionary["inherit"] * 100);
       baseStatsDictionary.Remove("birth");
       baseStatsDictionary.Remove("inherit");
       for (int i = 0; i < baseStatsDictionary.Count; ++i) {
@@ -440,8 +440,8 @@ namespace KeyGeneralPurposeLibrary.Classes {
       if (!trait.Contains("TraitVersion:::")) {
         trait = ConvertVersionZeroTraitToVersionOne(trait);
       }
-      string[] traitData = trait.Split(new[] { "{+-+}" }, StringSplitOptions.None);
-      KeyValuePair<string, string>[] traitDataPairs = traitData.Select(t => t.Split(new[] { ":::" }, StringSplitOptions.None)).Select(traitDataPair => traitDataPair.Length > 1 ? new KeyValuePair<string, string>(ConvertToSnakeCase(traitDataPair[0]), traitDataPair[1]) : new KeyValuePair<string, string>(null, null)).Where(x => x.Key != null).ToArray();
+      string[] traitData = trait.Split(new[] {"{+-+}"}, StringSplitOptions.None);
+      KeyValuePair<string, string>[] traitDataPairs = traitData.Select(t => t.Split(new[] {":::"}, StringSplitOptions.None)).Select(traitDataPair => traitDataPair.Length > 1 ? new KeyValuePair<string, string>(ConvertToSnakeCase(traitDataPair[0]), traitDataPair[1]) : new KeyValuePair<string, string>(null, null)).Where(x => x.Key != null).ToArray();
       Dictionary<string, string> traitDataDictionary = traitDataPairs.ToDictionary(x => x.Key, x => x.Value);
       id = traitDataDictionary["trait_name"];
       Author = traitDataDictionary["trait_author"];
@@ -460,12 +460,12 @@ namespace KeyGeneralPurposeLibrary.Classes {
       traitDataDictionary.Remove("trait_group");
       Dictionary<string, float> traitStatsDictionary = KeyLib.Get<KeyGenLibCustomTraitManager>().ConvertTraitStats(traitDataDictionary);
       if (traitStatsDictionary.ContainsKey("birth")) {
-        rate_birth = (int) (traitStatsDictionary["birth"] * 100);
+        rate_birth = (int)(traitStatsDictionary["birth"] * 100);
         traitStatsDictionary.Remove("birth");
       }
 
       if (traitStatsDictionary.ContainsKey("inherit")) {
-        rate_inherit = (int) (traitStatsDictionary["inherit"] * 100);
+        rate_inherit = (int)(traitStatsDictionary["inherit"] * 100);
         traitStatsDictionary.Remove("inherit");
       }
       for (int i = 0; i < traitStatsDictionary.Count; ++i) {
@@ -481,7 +481,7 @@ namespace KeyGeneralPurposeLibrary.Classes {
     }
 
     private static string ConvertVersionZeroTraitToVersionOne(string trait) {
-      string[] traitData = trait.Split(new[] { ";;;" }, StringSplitOptions.None);
+      string[] traitData = trait.Split(new[] {";;;"}, StringSplitOptions.None);
       StringBuilder newTrait = new StringBuilder();
       newTrait.Append("TraitName:::");
       newTrait.Append(traitData[0]);

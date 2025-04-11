@@ -43,7 +43,7 @@ namespace KeyGeneralPurposeLibrary.Assets {
             }
           }
 
-          string[] traitDataArray = traitData.Split(new[] { "|||" }, StringSplitOptions.RemoveEmptyEntries);
+          string[] traitDataArray = traitData.Split(new[] {"|||"}, StringSplitOptions.RemoveEmptyEntries);
           foreach (string traitDataString in traitDataArray) {
             try {
               CustomTrait trait = new CustomTrait();

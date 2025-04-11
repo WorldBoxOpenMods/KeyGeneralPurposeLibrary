@@ -1,10 +1,11 @@
 using System.Linq;
+
 namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
   public class MakeActorKing : KeyGenLibPower {
     public MakeActorKing() : base(new GodPower() {
       id = "make_actor_king_keygui",
       name = "Make Actor King",
-      force_map_mode = MetaType.None,
+      force_map_mode = MetaType.None
     }) {
     }
 
@@ -29,6 +30,6 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       WorldTip.showNow("KGPLL_SetKing_NoActorSelectedError", true, "top");
       return false;
     }
-    
+
   }
 }

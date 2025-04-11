@@ -3,17 +3,17 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
     public AddZoneToCity() : base(new GodPower() {
       id = "add_zone_to_city_keygui",
       name = "Add Zone To City",
-      force_map_mode = MetaType.City,
+      force_map_mode = MetaType.City
     }) {
     }
     private static City _cityToAddZoneTo;
-    
+
     protected override bool PowerButtonPress(string _) {
       _cityToAddZoneTo = null;
       WorldTip.showNow("KGPLL_CityZoneAddition_SelectCity", true, "top");
       return false;
     }
-    
+
     protected override bool ClickWithPower(WorldTile pTile, string pPowerID) {
       if (_cityToAddZoneTo == null) {
         _cityToAddZoneTo = pTile.zone.city;
