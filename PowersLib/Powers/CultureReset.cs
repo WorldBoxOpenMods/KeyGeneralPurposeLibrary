@@ -31,7 +31,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
       List<City> cities = culture.cities.ToList();
       Actor newFounder = culture.units.First();
       KeyLib.Get<KeyGenLibGodPowerLibrary>().Get<CultureDeletion>().DeleteCulture(culture);
-      Culture newCulture = World.world.cultures.newCulture(newFounder);
+      Culture newCulture = World.world.cultures.newCulture(newFounder, true);
       foreach (City t in cities) {
         t.setCulture(newCulture);
       }

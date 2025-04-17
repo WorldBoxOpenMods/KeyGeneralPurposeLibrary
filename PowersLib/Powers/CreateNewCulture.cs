@@ -15,7 +15,7 @@ namespace KeyGeneralPurposeLibrary.PowersLib.Powers {
     protected override bool ClickWithPower(WorldTile pTile, string pPowerID) {
       City cityToCreateCultureFor = pTile.zone.city;
       if (cityToCreateCultureFor != null) {
-        Culture newCulture = World.world.cultures.newCulture(cityToCreateCultureFor.leader);
+        Culture newCulture = World.world.cultures.newCulture(cityToCreateCultureFor.leader, true);
         KeyLib.Get<KeyGenLibGodPowerLibrary>().Get<CultureForceSelectCity>().ForceCultureOnCity(newCulture, cityToCreateCultureFor);
         WorldTip.showNow("KGPLL_CultureCreation_Success", true, "top");
         return true;
