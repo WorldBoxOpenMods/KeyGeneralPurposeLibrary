@@ -403,6 +403,9 @@ namespace KeyGeneralPurposeLibrary.Classes {
       rate_inherit = (int)(baseStatsDictionary["inherit"] * 100);
       baseStatsDictionary.Remove("birth");
       baseStatsDictionary.Remove("inherit");
+      if (base_stats == null) {
+        base_stats = new BaseStats();
+      }
       for (int i = 0; i < baseStatsDictionary.Count; ++i) {
         base_stats[MapStatNameBetween22And50(baseStatsDictionary.Keys.ElementAt(i))] = baseStatsDictionary[baseStatsDictionary.Keys.ElementAt(i)];
       }
@@ -472,7 +475,7 @@ namespace KeyGeneralPurposeLibrary.Classes {
         base_stats = new BaseStats();
       }
       for (int i = 0; i < traitStatsDictionary.Count; ++i) {
-        if (AssetManager.base_stats_library.dict.ContainsKey(traitStatsDictionary.Keys.ElementAt(i))) {
+        if (AssetManager.base_stats_library.dict.ContainsKey(MapStatNameBetween22And50(traitStatsDictionary.Keys.ElementAt(i)))) {
           base_stats[MapStatNameBetween22And50(traitStatsDictionary.Keys.ElementAt(i))] = traitStatsDictionary[traitStatsDictionary.Keys.ElementAt(i)];
         } else {
           Debug.LogWarning("Failed to load in stat " + traitStatsDictionary.Keys.ElementAt(i) + " for trait " + id);
