@@ -468,6 +468,9 @@ namespace KeyGeneralPurposeLibrary.Classes {
         rate_inherit = (int)(traitStatsDictionary["inherit"] * 100);
         traitStatsDictionary.Remove("inherit");
       }
+      if (base_stats == null) {
+        base_stats = new BaseStats();
+      }
       for (int i = 0; i < traitStatsDictionary.Count; ++i) {
         if (AssetManager.base_stats_library.dict.ContainsKey(traitStatsDictionary.Keys.ElementAt(i))) {
           base_stats[MapStatNameBetween22And50(traitStatsDictionary.Keys.ElementAt(i))] = traitStatsDictionary[traitStatsDictionary.Keys.ElementAt(i)];
